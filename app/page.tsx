@@ -9,12 +9,9 @@ export default async function Page() {
 
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Open Thoughts Project 
-      </h1>
-      <div className="mb-4">
+      <article className="prose">
         <CustomMDX source={content} />
-      </div>
+      </article>
       <div className="my-8">
         <BlogPosts />
       </div>
