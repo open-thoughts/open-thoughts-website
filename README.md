@@ -1,1 +1,1 @@
-Open Thoughts README
+Open Thoughts
