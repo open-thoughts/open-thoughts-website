@@ -1,14 +1,20 @@
 import { BlogPosts } from 'app/components/posts'
+import { CustomMDX } from 'app/components/mdx'
+import { readMDXFile } from 'app/blog/utils'
+import path from 'path'
 
-export default function Page() {
+export default async function Page() {
+  const file = path.join(process.cwd(), 'app', 'intro.mdx')
+  const { metadata, content } = readMDXFile(file)
+
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
         Open Thoughts Project 
       </h1>
-      <p className="mb-4">
-        {`The Open Thoughts project is curating the best open reasoning datasets. We are building in the open and are continuously releasing improved models, data, and data generation code.`}
-      </p>
+      <div className="mb-4">
+        <CustomMDX source={content} />
+      </div>
       <div className="my-8">
         <BlogPosts />
       </div>

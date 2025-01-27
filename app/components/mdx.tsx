@@ -99,11 +99,10 @@ let components = {
   Table,
 }
 
-export function CustomMDX(props) {
-  return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...(props.components || {}) }}
-    />
-  )
+interface CustomMDXProps {
+  source: string
+}
+
+export function CustomMDX({ source }: CustomMDXProps) {
+  return <MDXRemote source={source} components={components} />
 }
