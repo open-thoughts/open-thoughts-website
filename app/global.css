@@ -139,10 +139,24 @@ input[type='email'] {
 }
 
 table {
-  display: block;
-  max-width: fit-content;
+  display: table;
+  width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   white-space: nowrap;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2em 0;
+}
+
+th {
+  background-color: rgba(236, 236, 236, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  th {
+    background-color: rgba(36, 36, 36, 0.2);
+  }
 }
 
 .title {
