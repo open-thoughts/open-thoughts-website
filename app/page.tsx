@@ -1,7 +1,6 @@
 import { BlogPosts } from 'app/components/posts'
 import { CustomMDX } from 'app/components/mdx'
 import { readMDXFile } from 'app/blog/utils'
-import { BlogPosts } from 'app/components/posts'
 import path from 'path'
 
 export default async function Page() {
