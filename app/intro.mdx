@@ -4,98 +4,18 @@ publishedAt: 2024-02-20
 summary: Curating the best open reasoning datasets
 ---
 
-# Open Thoughts
+## Open Thoughts
 *Curating the best open reasoning datasets. Work in progress.*
 
 Our first **goal** is to curate a reasoning dataset to train a model that outperforms DeepSeek-R1-Distill [32B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B) and [7B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B).
 
-## News
-- **[2025/01/XX]** 🎉 Launch of the *Open Thoughts* project and [OpenThoughts-114k dataset](https://huggingface.co/mlfoundations-dev)
-- **[2025/01/22]** 🎉 We [release](https://www.bespokelabs.ai/blog/bespoke-stratos-the-unreasonable-effectiveness-of-reasoning-distillation) our [Bespoke-Stratos-17k dataset](https://huggingface.co/datasets/bespokelabs/Bespoke-Stratos-17k) and [Bespoke-Stratos-32B model](https://huggingface.co/bespokelabs/Bespoke-Stratos-32B) 
+### News
+- **[2025/01/XX]** We launched the *Open Thoughts* project and [OpenThoughts-114k dataset](https://huggingface.co/mlfoundations-dev)
+- **[2025/01/22]** We [released](https://www.bespokelabs.ai/blog/bespoke-stratos-the-unreasonable-effectiveness-of-reasoning-distillation) our [Bespoke-Stratos-17k dataset](https://huggingface.co/datasets/bespokelabs/Bespoke-Stratos-17k) and [Bespoke-Stratos-32B model](https://huggingface.co/bespokelabs/Bespoke-Stratos-32B) 
 
-## Links
-- 📊 [Bespoke-Stratos Blog Post](https://www.bespokelabs.ai/blog/bespoke-stratos-the-unreasonable-effectiveness-of-reasoning-distillation)
-- 🧠 [Bespoke-Stratos-17k dataset](https://huggingface.co/datasets/bespokelabs/Bespoke-Stratos-17k)
-- 🤖[Bespoke-Stratos-32B model](https://huggingface.co/bespokelabs/Bespoke-Stratos-32B)
-- 🤖 [Bespoke-Stratos-7B model](https://huggingface.co/bespokelabs/Bespoke-Stratos-7B)
+### Links
+- [Bespoke-Stratos Blog Post](https://www.bespokelabs.ai/blog/bespoke-stratos-the-unreasonable-effectiveness-of-reasoning-distillation)
+- [Bespoke-Stratos-17k dataset](https://huggingface.co/datasets/bespokelabs/Bespoke-Stratos-17k)
+- [Bespoke-Stratos-32B model](https://huggingface.co/bespokelabs/Bespoke-Stratos-32B)
+- [Bespoke-Stratos-7B model](https://huggingface.co/bespokelabs/Bespoke-Stratos-7B)
 
-## Results
-
-<table style={{ borderSpacing: '0.5rem', width: '100%' }}>
-  <thead>
-    <tr>
-      <th style={{ padding: '0.75rem' }}></th>
-      <th style={{ padding: '0.75rem' }}>Bespoke-Stratos-7B</th>
-      <th style={{ padding: '0.75rem' }}>Qwen2.5-7B-Instruct</th>
-      <th style={{ padding: '0.75rem' }}>DeepSeek-R1-Distill-Qwen-7B (Ours / Reported)</th>
-      <th style={{ padding: '0.75rem' }}>Open-Thinker-7B</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>AIME2024</td>
-      <td style={{ padding: '0.75rem' }}>20.0</td>
-      <td style={{ padding: '0.75rem' }}>10.0</td>
-      <td style={{ padding: '0.75rem' }}>43.3 / 55.5</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>MATH500</td>
-      <td style={{ padding: '0.75rem' }}>82.0</td>
-      <td style={{ padding: '0.75rem' }}>74.2</td>
-      <td style={{ padding: '0.75rem' }}>89.4 / 92.8</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>GPQA-Diamond</td>
-      <td style={{ padding: '0.75rem' }}>37.8</td>
-      <td style={{ padding: '0.75rem' }}>33.3</td>
-      <td style={{ padding: '0.75rem' }}>44.9 / 49.1</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>LiveCodeBench v2 Easy</td>
-      <td style={{ padding: '0.75rem' }}>71.4</td>
-      <td style={{ padding: '0.75rem' }}>65.9</td>
-      <td style={{ padding: '0.75rem' }}>81.3 /-</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>LiveCodeBench v2 Medium</td>
-      <td style={{ padding: '0.75rem' }}>25.5</td>
-      <td style={{ padding: '0.75rem' }}>18.9</td>
-      <td style={{ padding: '0.75rem' }}>42.2 / -</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>LiveCodeBench v2 Hard</td>
-      <td style={{ padding: '0.75rem' }}>1.6</td>
-      <td style={{ padding: '0.75rem' }}>3.3</td>
-      <td style={{ padding: '0.75rem' }}>2.4 / -</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-    <tr>
-      <td style={{ padding: '0.75rem' }}>LiveCodeBench v2 All</td>
-      <td style={{ padding: '0.75rem' }}>36.1</td>
-      <td style={{ padding: '0.75rem' }}>31.9</td>
-      <td style={{ padding: '0.75rem' }}>46.6 / -</td>
-      <td style={{ padding: '0.75rem' }}>?</td>
-    </tr>
-  </tbody>
-</table>
-
-## Repository
-
-Our code for data generation is available on [GitHub](https://github.com/open-thoughts/open-thoughts).
-
-## About Us
-
-We are a team of researchers and engineers from Bespoke Labs, Stanford, University of California Berkeley, University of Washington, Juelich Supercomputing Center (JSC), LAION, UCLA, UNC Chapel Hill, and Toyota Research Institute united around building the best datasets (and thus the best models). See our previous works at [datacomp.ai](https://www.datacomp.ai/).
-
-## Sponsors
-Open Thoughts is supported by 
-- [Bespoke Labs](https://www.bespokelabs.ai/)
-- [Lambda Labs](https://lambdalabs.com/)
-- [Texas Advanced Computing Center](https://tacc.utexas.edu/)
-- [Juelich Supercomputing Center](https://www.fz-juelich.de/en/ias/jsc)
-- [Toyota Research Institute](https://www.tri.global/)
