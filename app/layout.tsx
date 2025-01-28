@@ -33,6 +33,19 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    other: {
+      rel: 'apple-touch-icon',
+      url: '/apple-touch-icon.png',
+    },
+    android: [
+      { url: '/android-chrome-192x192.png', sizes: '192x192' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512' },
+    ],
+  },
 }
 
 const cx = (...classes) => classes.filter(Boolean).join(' ')
