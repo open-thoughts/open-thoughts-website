@@ -37,13 +37,21 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/apple-touch-icon.png',
-    other: {
-      rel: 'apple-touch-icon',
-      url: '/apple-touch-icon.png',
-    },
-    android: [
-      { url: '/android-chrome-192x192.png', sizes: '192x192' },
-      { url: '/android-chrome-512x512.png', sizes: '512x512' },
+    other: [
+      {
+        rel: 'apple-touch-icon',
+        url: '/apple-touch-icon.png',
+      },
+      {
+        rel: 'icon',
+        url: '/android-chrome-192x192.png',
+        sizes: '192x192',
+      },
+      {
+        rel: 'icon',
+        url: '/android-chrome-512x512.png',
+        sizes: '512x512',
+      },
     ],
   },
 }
