@@ -1,0 +1,42 @@
+---
+title: 'Measuring Reasoning with Evalchemy'
+publishedAt: '2025-01-30'
+summary: 'As part of the Open Thoughts project, we have added common reasoning benchmarks into Evalchemy.'
+---
+
+# Measuring Reasoning with Evalchemy
+
+If you can't measure, you can't improve it. At [Open Thoughts](https://github.com/open-thoughts/open-thoughts), we are on a mission to build the best [open reasoning datasets](https://huggingface.co/open-thoughts) (and therefore, the best open reasoning models). We are sharing everything publicly on our journey including the tools we are using to get there. Today we are releasing reasoning benchmarks into our model evaluation tool [Evalchemy](https://github.com/mlfoundations/evalchemy). 
+
+Model evaluations are the important feedback signal in the experimental feedback loop. Measuring the effectiveness of a particular data curation strategy allows us to know what works and what doesn't. These evaluations need to be reliable, repeatable, easy to use and fast. This is why we built [Evalchemy](https://github.com/mlfoundations/evalchemy). 
+
+[Evalchemy](https://github.com/mlfoundations/evalchemy) is a unified interface for evaluating post-trained LLMs. Built off the popular [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) by [EleutherAI](https://www.eleuther.ai/), we have added [additional benchmarks](https://github.com/mlfoundations/Evalchemy?tab=readme-ov-file#built-in-benchmarks) and [support](https://github.com/mlfoundations/Evalchemy?tab=readme-ov-file#-whats-new) for evaluating more API-based models. 
+
+As part of the [Open Thoughts](https://github.com/open-thoughts/open-thoughts) project, [Evalchemy](https://github.com/mlfoundations/evalchemy) now includes the common reasoning benchmarks [AIME24](https://huggingface.co/datasets/AI-MO/aimo-validation-aime), [AMC23](https://huggingface.co/datasets/AI-MO/aimo-validation-amc), [MATH500](https://github.com/openai/prm800k/tree/main?tab=readme-ov-file#math-splits), [LiveCodeBench](https://livecodebench.github.io/), and [GPQA-Diamond](https://huggingface.co/datasets/Idavidrein/gpqa). Coding evaluations [HumanEvalPlus](https://github.com/evalplus/evalplus), [MBPPPlus](https://github.com/evalplus/evalplus), [BigCodeBench](https://arxiv.org/abs/2406.15877), [MultiPL-E](https://github.com/nuprl/MultiPL-E/) and [CRUXEval](https://arxiv.org/abs/2401.03065) have also joined the expanding list of [available benchmarks](https://github.com/mlfoundations/Evalchemy?tab=readme-ov-file#built-in-benchmarks). 
+
+
+<Table
+  data={{
+    headers: [
+      "Method",
+      "Model Name",
+      "AIME2024",
+      "MATH500",
+      "GPQA-Diamond"
+    ],
+    rows: [
+      ["Evalchemy Eval", "DeepSeek-R1-Distill-Qwen-7B", "60.0", "88.2", "46.9"],
+      [<a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">R1 Report</a>, "DeepSeek-R1-Distill-Qwen-7B", "55.5", "83.3", "49.1"],
+      ["Evalchemy Eval", "gpt-4o-0513", "10.0", "75.8", "46.5"],
+      [<a href="https://openai.com/index/learning-to-reason-with-llms/">OpenAI Report</a>, "gpt-4o", "9.3", "60.3", "50.6"],
+      ["Evalchemy Eval", "o1-mini", "63.0", "85.6", "60.0"],
+      [<a href="https://openai.com/index/openai-o1-mini-advancing-cost-efficient-reasoning/">OpenAI Report</a>, "o1-mini", "-", "90.0", "60.0"],
+      ["Evalchemy Eval", "DeepSeek-R1", "86.7", "91.6", "71.2"],
+      [<a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">R1 Report</a>, "DeepSeek-R1", "79.8", "97.3", "71.5"]
+    ]
+  }}
+/>
+
+In the table above we show our evaluation results for reasoning benchmarks on popular models compared to the publicly reported numbers. 
+
+We are continuously improving [Evalchemy](https://github.com/mlfoundations/evalchemy). If there is a benchmark you would like to see added, please [raise an issue](https://github.com/mlfoundations/evalchemy/issues) on Github, or even better, open a [pull request](https://github.com/mlfoundations/evalchemy/pulls), as we [encourage contributions](https://github.com/mlfoundations/evalchemy?tab=readme-ov-file#contributing) from the community. 
