@@ -25,9 +25,9 @@ As part of the [Open Thoughts](https://github.com/open-thoughts/open-thoughts) p
     rows: [
       ["Evalchemy Eval", "DeepSeek-R1-Distill-Qwen-7B", "60.0", "88.2", "46.9"],
       [<a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">R1 Report</a>, "DeepSeek-R1-Distill-Qwen-7B", "55.5", "83.3", "49.1"],
-      ["Evalchemy Eval", "gpt-4o-2024-08-06", "10.0", "75.8", "46.5"],
+      ["Evalchemy Eval", "gpt-4o-2024-08-06", "8.7", "75.8", "46.5"],
       [<a href="https://openai.com/index/learning-to-reason-with-llms/">OpenAI Report</a>, "gpt-4o", "9.3", "60.3", "50.6"],
-      ["Evalchemy Eval", "o1-mini", "63.0", "85.6", "60.0"],
+      ["Evalchemy Eval", "o1-mini", "64.0", "85.6", "60.0"],
       [<a href="https://openai.com/index/openai-o1-mini-advancing-cost-efficient-reasoning/">OpenAI Report</a>, "o1-mini", "-", "90.0", "60.0"],
       ["Evalchemy Eval", "DeepSeek-R1", "86.7", "91.6", "71.2"],
       [<a href="https://github.com/deepseek-ai/DeepSeek-R1/blob/main/DeepSeek_R1.pdf">R1 Report</a>, "DeepSeek-R1", "79.8", "97.3", "71.5"]
@@ -36,6 +36,8 @@ As part of the [Open Thoughts](https://github.com/open-thoughts/open-thoughts) p
 />
 
 In the table above we show our evaluation results for reasoning benchmarks on popular models compared to the publicly reported numbers. 
+
+Note: The AIME24 dataset has a small sample size, resulting in high variance in evaluation accuracy. To mitigate this, we updated the code to compute the average score over five evaluation runs with different seeds. No system prompt is used, the maximum token length is set to 32,768, and the temperature is 0.7.
 
 We are continuously improving [Evalchemy](https://github.com/mlfoundations/evalchemy). If there is a benchmark you would like to see added, please [raise an issue](https://github.com/mlfoundations/evalchemy/issues) on Github, or even better, open a [pull request](https://github.com/mlfoundations/evalchemy/pulls), as we [encourage contributions](https://github.com/mlfoundations/evalchemy?tab=readme-ov-file#contributing) from the community. 
 
