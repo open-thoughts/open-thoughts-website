@@ -7,16 +7,20 @@ export function Citation({ children }: { children: React.ReactNode }) {
   
   const copyToClipboard = () => {
     // Convert children to string if it's not already
-    const text = typeof children === 'string' ? children : children.toString();
+    const text = children?.toString() || '';
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
+  if (!children) {
+    return null;
+  }
+
   return (
     <div className="relative">
       <pre className="citation-block">
-        <code>{typeof children === 'string' ? children : children.toString()}</code>
+        <code>{children.toString()}</code>
       </pre>
       <button
         onClick={copyToClipboard}
