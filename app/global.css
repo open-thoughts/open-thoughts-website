@@ -162,3 +162,12 @@ th {
 .title {
   text-wrap: balance;
 }
+
+.citation-block {
+  @apply relative bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-4 px-4 text-sm font-mono;
+  margin: 1.5em 0;
+}
+
+.citation-block code {
+  @apply block whitespace-pre-wrap break-all;
+}
