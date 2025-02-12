@@ -29,6 +29,27 @@ Our first goal is to curate a reasoning dataset to train state of the art small 
   data={{
     headers: [
       "Model",
+      "Dataset",
+      "AIME24",
+      "AIME25 I",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      ["OpenThinker-7B", "114k", "31.3", "30.7", "84.4", "38.9", "41.8"],
+      ["OpenThinker-7B-Unverified", "173k", "34.0", "29.33", "83.0", "39.4", "43.8"],
+      ["OpenThinker-32B", "114k", "66.7", "53.3", "90.6", "61.6", "68.9"],
+      ["OpenThinker-32B-Unverified", "173k", "60.7", "44.0", "90.0", "60.6", "69.2"]
+    ]
+  }}
+/>
+
+{/*
+<Table
+  data={{
+    headers: [
+      "Model",
       "AIME24",
       "MATH500",
       "GPQA-D",
@@ -45,6 +66,7 @@ Our first goal is to curate a reasoning dataset to train state of the art small 
     ]
   }}
 />
+*/}
 
 The numbers reported in the table above are evaluated with our open-source tool [Evalchemy](https://github.com/mlfoundations/evalchemy).
 
