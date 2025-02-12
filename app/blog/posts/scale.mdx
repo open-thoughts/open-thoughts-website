@@ -57,7 +57,7 @@ The additional metadata will make it easier to use this dataset in new ways: fil
 ds = load_dataset("open-thoughts/OpenThoughts-114k", config_name="metadata")
 ```
 
-Verification
+## Verification
 
 To obtain the final [OpenThoughts-114k dataset](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k), we verify the answers and eliminate incorrect responses. As shown below, keeping the reasoning traces that fail verification can harm performance, though the unverified model still performs well compared to other 32B reasoning models. Verification serves to maintain the quality of the R1 annotations while scaling up the diversity and size of the set of training prompts. On the other hand, unverified data can be scaled more easily, which makes it worth further exploring as well.
 
