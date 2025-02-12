@@ -20,8 +20,8 @@ We release OpenThinker-32B, a state-of-the-art open-data reasoning model. We sho
       ["LIMO-32B", "0.8k", "56.7", "49.3", "86.6", "58.1", "-"],
       ["s1-32B", "1k", "36.0", "25.3", "84.8", "50.5", "40.9"],
       ["s1.1-32B", "1k", "64.7", "49.3", "89.0", "60.1", "-"],
-      ["OpenThinker-32B", "114k", "66.0", "53.3", "90.6", "61.6", "68.9"],
-      ["R1-Distill-32B", "800k", "76.7", "55.9", "89.4", "57.6", "71.2"]
+      ["**OpenThinker-32B**", "114k", "66.0", "53.3", "**90.6**", "**61.6**", "68.9"],
+      ["R1-Distill-32B", "800k", "**76.7**", "**55.9**", "89.4", "57.6", "**71.2**"]
     ]
   }}
 />
@@ -38,13 +38,13 @@ As requested by the community, we have updated the final OpenThoughts-114k datas
 - `deepseek_solution`
 - `domain`
 - `source`
-- `test_cases` (for code)
-- `starter_code` (for code) 
+- `test_cases` (code only)
+- `starter_code` (code only) 
 
 The additional metadata will make it easier to use this dataset in new ways: filtering, swapping out domains, checking verification, changing the reasoning trace templating, etc. We are also excited to see the community use this dataset's unified problems and ground truth solutions for RL on top of the OpenThinker models, which DeepScaleR has shown to work particularly well at a smaller scale.
 
 ```python
-dataset = load_dataset("open-thoughts/OpenThoughts-114k", config_name="metadata")
+ds = load_dataset("open-thoughts/OpenThoughts-114k", config_name="metadata")
 ```
 
 Verification
@@ -71,7 +71,7 @@ To obtain the final OpenThoughts-114k dataset, we verify the answers and elimina
   }}
 />
 
-Code verification is done by checking the solution attempt against existing test cases using our code verification scripts. Inspired by the challenges faced during code execution, we implemented curator’s code execution framework that enables users to scalably and securely execute code and verify against expected outputs. Math verification is determined by an LLM judge given the ground truth solution and DeepSeek-R1 solution attempt. We found that using an LLM judge instead of a stricter parsing engine (Math-Verify) for verification during data generation results in a higher yield and leads to higher performing downstream models. 
+Code verification is done by checking the solution attempt against existing test cases using our code verification scripts. Inspired by the challenges faced during code execution, we implemented curator's code execution framework that enables users to scalably and securely execute code and verify against expected outputs. Math verification is determined by an LLM judge given the ground truth solution and DeepSeek-R1 solution attempt. We found that using an LLM judge instead of a stricter parsing engine (Math-Verify) for verification during data generation results in a higher yield and leads to higher performing downstream models. 
 
 ## Data Generation Verifier
 <Table
