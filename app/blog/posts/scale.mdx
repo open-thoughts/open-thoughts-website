@@ -51,11 +51,13 @@ As requested by the community, we have updated the final [OpenThoughts-114k data
 - `test_cases` (code only)
 - `starter_code` (code only) 
 
-The additional metadata will make it easier to use this dataset in new ways: filtering, swapping out domains, checking verification, changing the reasoning trace templating, etc. We are also excited to see the community use this dataset's unified problems and ground truth solutions for RL on top of the OpenThinker models, which [DeepScaleR](https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2) has shown to work particularly well at a smaller scale.
+The additional metadata will make it easier to use this dataset in new ways: filtering, swapping out domains, checking verification, changing the reasoning trace templating, etc. 
 
 ```python
-ds = load_dataset("open-thoughts/OpenThoughts-114k", "metadata", split="train")
+load_dataset("open-thoughts/OpenThoughts-114k", "metadata", split="train")
 ```
+
+We are also excited to see the community use this dataset's unified problems and ground truth solutions for RL on top of the OpenThinker models, which [DeepScaleR](https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2) has shown to work particularly well at a smaller scale.
 
 ## Verification
 
