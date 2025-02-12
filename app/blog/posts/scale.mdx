@@ -42,12 +42,12 @@ We train [OpenThinker-32B](https://huggingface.co/open-thoughts/OpenThinker-32B)
 As requested by the community, we have updated the final [OpenThoughts-114k dataset](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) to contain a "metadata" configuration that includes separate columns for:
 - `problem`
 - `ground_truth_solution`
+- `test_cases` (code only)
+- `starter_code` (code only) 
 - `deepseek_reasoning`
 - `deepseek_solution`
 - `domain`
 - `source`
-- `test_cases` (code only)
-- `starter_code` (code only) 
 
 The additional metadata will make it easier to use this dataset in new ways such as filtering, swapping out domains, checking verification, and changing the reasoning trace templating. 
 
