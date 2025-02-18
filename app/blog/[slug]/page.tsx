@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
-
+import { MailchimpForm } from 'app/components/MailchimpForm'
 export async function generateStaticParams() {
   let posts = getBlogPosts()
 
@@ -93,6 +93,10 @@ export default function Blog({ params }) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
+      
+      <div className="mt-16 border-t border-neutral-200 dark:border-neutral-800 pt-8">
+        <MailchimpForm />
+      </div>
     </section>
   )
 }
