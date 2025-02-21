@@ -4,7 +4,7 @@ publishedAt: '2025-02-22'
 summary: 'Reasoning models can struggle on simple reasoning puzzles, demostrating a lack of robustness and generalization.'
 ---
 
-Reasoning models achieve impressive performance on [standardized benchmarks](./measure) (AIME, MATH500, GPQA), yet they still show deficits in robustness and generalization on simple problems. We observe that when these reasoning models are confronted with small changes within the same problem, their performance can vary greatly. We study this phenomenon by testing models on [Alice In Wonderland](https://arxiv.org/abs/2406.02061) (AIW) problems. We provide an example below.
+Reasoning models achieve impressive performance on [standardized benchmarks](./measure) (AIME, MATH500, GPQA), yet show deficits in robustness and generalization on simple problems. We observe that when these reasoning models are confronted with small changes within the same problem, their performance can vary greatly. We study this phenomenon by testing models on [Alice In Wonderland](https://arxiv.org/abs/2406.02061).
 
 <div className="flex justify-center my-8">
   <Image
@@ -16,7 +16,7 @@ Reasoning models achieve impressive performance on [standardized benchmarks](./m
   />
 </div>
 
-This test uses simple problem templates with 6 natural variations, resulting in very similar problem instances. These problems are significantly easier to solve for humans than problems on AIME2024 for example, but current reasoning models perform much poorer, showing strong sensitivity to variations in these simple problems. 
+Alice in Wonderland (AIW) uses simple problem templates with 6 natural variations, resulting in very similar problem instances. These problems are significantly easier to solve for humans than problems found in popular reasoning benchmarks like AIME2024, but current reasoning models still struggle and are sensitive to variations.
 
 
 We test reasoning models on 3 sets of [AIW problems](https://github.com/LAION-AI/AIW/blob/main/prompts/prompts.json) (AIW Friends, AIW Plus and AIW Circle Colleagues), each containing 6 variations of the same puzzle template. 
@@ -34,7 +34,7 @@ Non-reasoning LLMs struggle significantly on these problems. Testing GPT-4o-mini
   />
 </div>
 
-Reasoning models can achieve higher average accuracy than traditional LLMs. o1 and o1-preview achieve the highest accuracy, but DeepSeek R-1 and the larger distilled reasoning models perform better than o1-mini. Surprisingly, these larger distilled reasoning models also perform equally or better than the full DeepSeek R-1 model on the AIW tasks. 
+Reasoning models can achieve higher average accuracy than traditional LLMs on AIW. o1 and o1-preview achieve the highest accuracy, but DeepSeek R-1 and the larger distilled reasoning models perform better than o1-mini. Surprisingly, these larger distilled reasoning models also perform equally or better than the full DeepSeek R-1 model on the AIW tasks. 
 
 <BarChart
   data={{
@@ -76,7 +76,7 @@ Reasoning models can achieve higher average accuracy than traditional LLMs. o1 a
   height={500}
 />
 
-The large variance in the plot below stems from large fluctuations across problem variations, indicating that the larger scale reasoning models in the performance middle field share similar robustness issues. Most standard LLMs and smaller scale reasoning models are clearly left behind.
+We also observe large variance due to fluctuation across problem variations, showing robustness issues even for high performing reasoning models. o1 and o1-preview, the highest performing models, show much better robustness. 
 
 <div className="flex justify-center my-8">
   <Image
@@ -89,7 +89,7 @@ The large variance in the plot below stems from large fluctuations across proble
 </div>
 
 
-Below, we can see that the open reasoning models and closed o1-mini still fluctuate much more than o1-preview on different problem variations, while large scale state-of-the art standard LLMs - Llama 3.1 405B and DeepSeek v3 671B - suffer breakdown and have very low correct response rates overall. We show correct response rates with different colors for each of 6 variations of AIW Friends problem.
+Below, we show this variance across problem variations in greater detail by visualizing correct response rates with different colors for each of 6 variations of AIW Friends. Open reasoning models and o1-mini fluctuate much more than o1-preview on different problem variations. Large scale non-reasoning LLMs (Llama 3.1 405B and DeepSeek v3 671B) have very low correct response rates overall. 
 
 <div className="flex justify-center my-8">
   <Image
@@ -101,7 +101,7 @@ Below, we can see that the open reasoning models and closed o1-mini still fluctu
   />
 </div>
 
-In summary, we observe that these open reasoning models may not be as good reasoners as their standard benchmarks suggest (AIME, MATH). Fluctuations on AIW problems show that most current open reasoning models still have severe lack of robustness to simple reasoning problems. There is much more work to be done to catch up our open reasoning models with the o1 series!
+In summary, we observe that open reasoning models have a severe lack of robustness to simple reasoning problems found in Alice in Wonderland. This lack of ability is not currently captured by the standard benchmarks (AIME, MATH, GPQA) the community is using to evaluate reasoning models. There is much more work to be done to close the gap between the best open reasoning models and the best closed reasoning models.
 
 
 ### Citation
