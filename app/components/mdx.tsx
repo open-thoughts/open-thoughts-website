@@ -4,6 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { highlight } from 'sugar-high'
 import React from 'react'
 import { Citation } from './Citation'
+import { BarChart } from './charts/BarChart'
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -105,6 +106,7 @@ let components = {
   code: Code,
   Table,
   Citation,
+  BarChart,
 }
 
 interface CustomMDXProps {
