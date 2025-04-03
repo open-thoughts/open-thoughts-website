@@ -1,0 +1,103 @@
+---
+title: 'Outperforming DeepSeekR1-32B with OpenThinker2'
+publishedAt: '2025-04-03'
+summary: 'Announcing the next iteration of our open reasoning models and datasets.'
+---
+Today, we are releasing OpenThinker2-32B and OpenThinker2-7B, two new state of the art open-data reasoning models, alongside OpenThoughts2-1M, the reasoning dataset used to train these models. Our model is simply trained with SFT on our curated data, without any RL.
+
+<Table
+  data={{
+    headers: [
+      "Model",
+      "Dataset",
+      "Open",
+      "AIME24",
+      "AIME25 I",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      [<a href='https://huggingface.co/GAIR/LIMO'>LIMO-32B</a>, <a href="https://huggingface.co/datasets/GAIR/LIMO">0.8k</a>, "✅", "56.7", "49.3", "86.6", "58.1", "60.0"],
+      [<a href='https://huggingface.co/simplescaling/s1-32B'>s1-32B</a>, <a href="https://huggingface.co/datasets/simplescaling/s1K">1k</a>, "✅", "36.0", "25.3", "84.8", "50.5", "40.9"],
+      [<a href='https://huggingface.co/simplescaling/s1.1-32B'>s1.1-32B</a>, <a href="https://huggingface.co/datasets/simplescaling/s1K-1.1">1k</a>, "✅", "64.7", "49.3", "89.0", "60.1", "65.5"],
+      [<a href='https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B'>R1-Distill-32B</a>, "800k", "❌", <b>76.7</b>, <b>55.9</b>, "89.4", "57.6", <b>71.2</b>],
+      [<a href='https://huggingface.co/open-thoughts/OpenThinker-32B'><b>OpenThinker-32B</b></a>, <a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k">114k</a>, "✅", "66.0", "53.3", <b>90.6</b>, <b>61.6</b>, "68.9"]
+    ]
+  }}
+/>
+
+When we launched the Open Thoughts project, our goal was to build a SFT dataset in the open and train a DeepSeek-R1-Distill-Qwen-32B level reasoning model. We have now achieved that goal, averaged over our reasoning evaluations and we outperform DeepSeek-R1-Distill-Qwen-32B. 
+
+We used two approaches to create OpenThoughts2-1M by adding to OpenThoughts-114K:
+- Leveraging existing reasoning data from the open source community
+- Sourcing and generating new code and math reasoning data
+
+## Leveraging Existing Reasoning Data
+The open source community has released a flurry of reasoning datasets in the last two months. We aimed to build on OpenThoughts-114K by adding new data from new external datasets to achieve a greater diversity and scale. We finetuned the Qwen2.5-7B-Instruct model on GeneralThought-430K, OpenR1-Math-Raw,  Llama-Nemotron-Post-Training-Dataset-v1,  SYNTHETIC-1,  KodCode-V1 and measured downstream performance on our reasoning evaluation suite. Out of the datasets that we used in these experiments, we found that OpenR1-Math performed the best overall so we include it in OpenThoughts2. 
+
+<Table>
+
+
+
+
+
+## Generating New Reasoning Data
+
+To further build upon the OpenThoughts-114k and OpenR1-Math mix, we generated additional math and code reasoning data. To do this, we try 26 different approaches for sourcing and generating math and code questions. For each strategy, we sample 5,000 questions, distill with DeepSeek-R1 and finetune Qwen-2.5-7B-Instruct on the resulting data. 
+
+To determine the best data sources, we measure the downstream performance of each model on relevant reasoning benchmarks. For code sources, we measure LiveCodeBenchV2. For math sources, we measure HumanEval, MATH500, AMC23, AIME24, GPQADiamond and LiveCodeBenchV2.
+
+As seen in the tables below, the top performing math datasets are synthetic datasets from AutoMathInstruct, TigerLab, and Nvidia. We constructed AutoMathInstruct by searching for math related data within AutoMathText and using gpt-4o-mini to form related questions. The top performing code datasets are a mix of human coding questions (e.g. Code-290k-ShareGPT-Vicuna) and synthetic coding questions (e.g.  CodeFeedback-Filtered-Instruction).
+
+<Table
+  data={{
+    headers: [
+      "Model",
+      "Dataset",
+      "AIME24",
+      "AIME25 I",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B">OpenThinker-7B</a>, <a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k">114k</a>, "31.3", "30.7", "84.4", "38.9", "41.8"],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B-Unverified">OpenThinker-7B-Unverified</a>, <a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-Unverified-173k">173k</a>, "34.0", "29.33", "83.0", "39.4", "43.8"],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-32B">OpenThinker-32B</a>, <a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k">114k</a>, "66.7", "53.3", "90.6", "61.6", "68.9"],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-32B-Unverified">OpenThinker-32B-Unverified</a>, <a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-Unverified-173k">173k</a>, "60.7", "44.0", "90.0", "60.6", "69.2"]
+    ]
+  }}
+/>
+
+Using 30K questions from each of the top 5 data sources for code and 12.5k questions from each of the top 4 data sources for math on top of our OpenThoughts-114k + OpenR1-Math-Raw mix, we create our final OpenThoughts2-1M dataset. 
+
+
+## OpenThoughts2-1M
+OpenThoughts2 is a combination of OpenThoughts-114k, verified reasoning traces from OpenR1-Math, and the questions from our best math and code sources. This is visualized in the diagram below. Our full OpenThoughts2-1M dataset is released on HuggingFace. We will soon be adding the data generation code for OpenThoughts2-1M to our github repository.
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/openthoughts-114k-diagram.png"
+    alt="OpenThoughts-114k Data Curation Diagram"
+    className="rounded-lg"
+    width={1000}
+    height={1000}
+  />
+</div>
+
+## Evaluation Details
+We evaluate OpenThinker2 on a set of popular reasoning benchmarks, running each benchmark multiple times (5x - AIME24, AIME25, AMC23 and 3x - LiveCodeBenchV2, GPQA-Diamond) and reporting the average accuracy. We set the temperature to 0.7 and the maximum token length to 32,768 during sampling. Our training datasets are decontaminated by removing samples with over 90% indel similarity against evaluation problems. All evaluations are conducted using our open-source framework Evalchemy, which we detailed in our previous post on reasoning evaluations.
+
+## Conclusion
+OpenThoughts2-1M is a combination of OpenThoughts-114k, OpenR1, and our newly generated data. We finetune Qwen2.5-7B-Instruct and Qwen2.5-32B-Instruct on OpenThoughts2-1M to yield OpenThinker2-7B and OpenThinker2-32B. When compared with other reasoning models created from the same base, OpenThinker2-32B outperforms all other open-data models. Since all OpenThinker models have been trained only with SFT, we expect that RL post-training can further improve their performance. We are excited for the research community to continue building together on these new reasoning models and datasets.
+
+### Citation
+<Citation>{`@misc{openthoughts,
+  author = {Team, OpenThoughts},
+  month = Feb,
+  title = {{Open Thoughts}},
+  howpublished = {https://open-thoughts.ai},
+  year = {2025}
+}`}</Citation>
+
