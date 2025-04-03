@@ -58,6 +58,30 @@ We used two approaches to create [OpenThoughts2-1M](https://huggingface.co/datas
 The open source community has released a flurry of reasoning datasets in the last two months. We aimed to build on [OpenThoughts-114K](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) by adding new data from new external datasets to achieve a greater diversity and scale. We finetuned the [Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) model on [GeneralThought-430K](https://huggingface.co/datasets/GeneralReasoning/GeneralThought-430K), [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw), [Llama-Nemotron-Post-Training-Dataset-v1](https://huggingface.co/datasets/nvidia/Llama-Nemotron-Post-Training-Dataset-v1), [SYNTHETIC-1](https://huggingface.co/datasets/PrimeIntellect/SYNTHETIC-1), [KodCode-V1](https://huggingface.co/datasets/KodCode/KodCode-V1) and measured downstream performance on our reasoning evaluation suite. Out of the datasets that we used in these experiments, we found that [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw) performed the best overall so we include it in [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M). 
 
 
+<Table
+  data={{
+    headers: [
+      "Dataset",
+      "Rows",
+      "AIME24",
+      "AIME25",
+      "AMC23",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      [<a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k">OpenThoughts-114K</a>, "114k", "31.3", "28.0", "72.0", "84.4", "42.9", "41.8"],
+      [<a href="https://huggingface.co/datasets/GeneralReasoning/GeneralThought-430K">GeneralThought-430K</a>, "430k", "17.3", "14.7", "55.0", "75.2", "37.4", "23.1"],
+      [<a href="https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw">OpenR1-Math-Raw</a>, "669k", "46.7", "30.7", "80.5", "86.2", "44.4", "16.8"],
+      [<a href="https://huggingface.co/datasets/nvidia/Llama-Nemotron-Post-Training-Dataset-v1">Nemotron</a>, "1M", "8.7", "1.3", "38.0", "61.0", "32.8", "18.5"],
+      [<a href="https://huggingface.co/datasets/PrimeIntellect/SYNTHETIC-1">SYNTHETIC-1</a>, "900k", "18.7", "16.7", "61.0", "77.2", "37.9", "29.0"],
+      [<a href="https://huggingface.co/datasets/KodCode/KodCode-V1">KodCode-V1</a>, "484K", "13.3", "8.0", "48.5", "69.4", "35.5", "35.9"]
+    ]
+  }}
+/>
+
+
 ## Generating New Reasoning Data
 
 To further build upon the [OpenThoughts-114K](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) and [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw) mix, we generated additional math and code reasoning data. To do this, we try 26 different approaches for sourcing and generating math and code questions. For each strategy, we sample 5,000 questions, distill with [DeepSeek-R1](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B) and finetune [Qwen-2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) on the resulting data. 
