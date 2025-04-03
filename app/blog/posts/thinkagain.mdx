@@ -27,6 +27,12 @@ Today, we are releasing OpenThinker2-32B and OpenThinker2-7B, two new state of t
   }}
 />
 
+When we launched the Open Thoughts project, our goal was to build a SFT dataset in the open and train a DeepSeek-R1-Distill-Qwen-32B level reasoning model. We have now achieved that goal, averaged over our reasoning evaluations and we outperform DeepSeek-R1-Distill-Qwen-32B. 
+
+We used two approaches to create OpenThoughts2-1M by adding to OpenThoughts-114K:
+- Leveraging existing reasoning data from the open source community
+- Sourcing and generating new code and math reasoning data
+
 <Table
   data={{
     headers: [
@@ -48,12 +54,6 @@ Today, we are releasing OpenThinker2-32B and OpenThinker2-7B, two new state of t
     ]
   }}
 />
-
-When we launched the Open Thoughts project, our goal was to build a SFT dataset in the open and train a DeepSeek-R1-Distill-Qwen-32B level reasoning model. We have now achieved that goal, averaged over our reasoning evaluations and we outperform DeepSeek-R1-Distill-Qwen-32B. 
-
-We used two approaches to create OpenThoughts2-1M by adding to OpenThoughts-114K:
-- Leveraging existing reasoning data from the open source community
-- Sourcing and generating new code and math reasoning data
 
 ## Leveraging Existing Reasoning Data
 The open source community has released a flurry of reasoning datasets in the last two months. We aimed to build on OpenThoughts-114K by adding new data from new external datasets to achieve a greater diversity and scale. We finetuned the Qwen2.5-7B-Instruct model on GeneralThought-430K, OpenR1-Math-Raw,  Llama-Nemotron-Post-Training-Dataset-v1,  SYNTHETIC-1,  KodCode-V1 and measured downstream performance on our reasoning evaluation suite. Out of the datasets that we used in these experiments, we found that OpenR1-Math performed the best overall so we include it in OpenThoughts2. 
