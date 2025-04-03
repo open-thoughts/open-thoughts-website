@@ -45,31 +45,50 @@ To determine the best data sources, we measure the downstream performance of eac
 
 <Table
   data={[
-    { source: 'm-a-p/CodeFeedback-Filtered-Instruction', lcbv2: '0.1761' },
-    { source: 'ajibawa-2023/Code-290k-ShareGPT', lcbv2: '0.1585' },
-    { source: 'cognitivecomputations/dolphin-coder', lcbv2: '0.1448' },
-    { source: 'glaiveai/glaive-code-assistant-v3', lcbv2: '0.1350' },
-    { source: 'ise-uiuc/Magicoder-OSS-Instruct-75K', lcbv2: '0.1174' },
-    { source: 'OpenCoder-LLM/opc-sft-stage2', lcbv2: '0.0861' },
-    { source: 'christopher/rosetta-code', lcbv2: '0.0861' },
-    { source: 'Magpie-Align/Magpie-Qwen2.5-Coder-Pro-300K-v0.1', lcbv2: '0.0705' },
-    { source: 'Multilingual-Multimodal-NLP/McEval-Instruct', lcbv2: '0.0626' },
-    { source: 'bugdaryan/sql-create-context-instruction', lcbv2: '0.0587' },
-    { source: 'nampdn-ai/tiny-codes', lcbv2: '0.0509' },
-    { source: 'bigcode/self-oss-instruct-sc2-exec-filter-50k', lcbv2: '0.0489' },
-    { source: 'bigcode/commitpackft', lcbv2: '0.0431' },
-    { source: 'cfahlgren1/react-code-instructions', lcbv2: '0.0352' },
-    { source: 'SenseLLM/ReflectionSeq-GPT', lcbv2: '0.0235' }
+    { source: 'm-a-p/CodeFeedback-Filtered-Instruction', lcbv2: '17.6' },
+    { source: 'ajibawa-2023/Code-290k-ShareGPT', lcbv2: '15.9' },
+    { source: 'cognitivecomputations/dolphin-coder', lcbv2: '14.5' },
+    { source: 'glaiveai/glaive-code-assistant-v3', lcbv2: '13.5' },
+    { source: 'ise-uiuc/Magicoder-OSS-Instruct-75K', lcbv2: '11.7' },
+    { source: 'OpenCoder-LLM/opc-sft-stage2', lcbv2: '8.6' },
+    { source: 'christopher/rosetta-code', lcbv2: '8.6' },
+    { source: 'Magpie-Align/Magpie-Qwen2.5-Coder-Pro-300K-v0.1', lcbv2: '7.1' },
+    { source: 'Multilingual-Multimodal-NLP/McEval-Instruct', lcbv2: '6.3' },
+    { source: 'bugdaryan/sql-create-context-instruction', lcbv2: '5.9' },
+    { source: 'nampdn-ai/tiny-codes', lcbv2: '5.1' },
+    { source: 'bigcode/self-oss-instruct-sc2-exec-filter-50k', lcbv2: '4.9' },
+    { source: 'bigcode/commitpackft', lcbv2: '4.3' },
+    { source: 'cfahlgren1/react-code-instructions', lcbv2: '3.5' },
+    { source: 'SenseLLM/ReflectionSeq-GPT', lcbv2: '2.4' }
   ]}
   columns={[
     { header: 'Data Source', accessorKey: 'source' },
-    { header: 'LCBv2', accessorKey: 'lcbv2' }
+    { header: 'LCBv2 (%)', accessorKey: 'lcbv2' }
+  ]}
+/>
+
+<Table
+  data={[
+    { source: 'TIGER-Lab/MathInstruct', average: '25.1' },
+    { source: 'TIGER-Lab/MATH-plus', average: '24.9' },
+    { source: 'AutoMathInstruct  (ours)', average: '24.7' },
+    { source: 'nvidia/OpenMathInstruct-2', average: '24.1' },
+    { source: 'ai2-adapt-dev/openmath-2-math', average: '23.5' },
+    { source: 'Asap7772/hendrycks-math-mc-llama-sft-intermediate-parallel', average: '23.3' },
+    { source: 'ibivibiv/math_instruct', average: '20.5' },
+    { source: 'ddrg/named_math_formulas', average: '20.4' },
+    { source: 'ajibawa-2023/Maths-College', average: '19.2' },
+    { source: 'deepmind/math_dataset', average: '14.1' },
+    { source: 'allenai/math_qa', average: '13.2' },
+    { source: 'mathmadness/MathCoder', average: '9.1' }
+  ]}
+  columns={[
+    { header: 'Data Source', accessorKey: 'source' },
+    { header: 'Average (%)', accessorKey: 'average' }
   ]}
 />
 
 As seen in the tables below, the top performing math datasets are synthetic datasets from AutoMathInstruct, TigerLab, and Nvidia. We constructed AutoMathInstruct by searching for math related data within AutoMathText and using gpt-4o-mini to form related questions. The top performing code datasets are a mix of human coding questions (e.g. Code-290k-ShareGPT-Vicuna) and synthetic coding questions (e.g.  CodeFeedback-Filtered-Instruction).
-
-<INSERT TABLE>
 
 Using 30K questions from each of the top 5 data sources for code and 12.5k questions from each of the top 4 data sources for math on top of our OpenThoughts-114k + OpenR1-Math-Raw mix, we create our final OpenThoughts2-1M dataset. 
 
