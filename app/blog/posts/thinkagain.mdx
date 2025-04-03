@@ -9,20 +9,20 @@ Today, we are releasing OpenThinker2-32B and OpenThinker2-7B, two new state of t
   data={{
     headers: [
       "Model",
-      "Dataset",
-      "Open",
+      "Data",
       "AIME24",
-      "AIME25 I",
+      "AIME25",
+      "AMC23",
       "MATH500",
       "GPQA-D",
       "LCBv2"
     ],
     rows: [
-      [<a href='https://huggingface.co/GAIR/LIMO'>LIMO-32B</a>, <a href="https://huggingface.co/datasets/GAIR/LIMO">0.8k</a>, "✅", "56.7", "49.3", "86.6", "58.1", "60.0"],
-      [<a href='https://huggingface.co/simplescaling/s1-32B'>s1-32B</a>, <a href="https://huggingface.co/datasets/simplescaling/s1K">1k</a>, "✅", "36.0", "25.3", "84.8", "50.5", "40.9"],
-      [<a href='https://huggingface.co/simplescaling/s1.1-32B'>s1.1-32B</a>, <a href="https://huggingface.co/datasets/simplescaling/s1K-1.1">1k</a>, "✅", "64.7", "49.3", "89.0", "60.1", "65.5"],
-      [<a href='https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B'>R1-Distill-32B</a>, "800k", "❌", <b>76.7</b>, <b>55.9</b>, "89.4", "57.6", <b>71.2</b>],
-      [<a href='https://huggingface.co/open-thoughts/OpenThinker-32B'><b>OpenThinker-32B</b></a>, <a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k">114k</a>, "✅", "66.0", "53.3", <b>90.6</b>, <b>61.6</b>, "68.9"]
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker2-7B">OpenThinker2-7B</a>, "✅", "50.0", "33.3", "89.5", "88.4", "49.3", "55.6"],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B">OpenThinker-7B</a>, "✅", "31.3", "23.3", "74.5", "83.2", "42.9", "38.0"],
+      [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B">DeepSeek-R1-Distill-Qwen-7B</a>, "❌", "57.3", "33.3", "92.0", "89.6", "47.3", "48.4"],
+      [<a href="https://huggingface.co/open-r1/OlympicCoder-7B">OlympicCoder-7B</a>, "✅", "20.7", "15.3", "63.0", "74.8", "25.3", "55.4"],
+      [<a href="https://huggingface.co/open-r1/OpenR1-Qwen-7B">OpenR1-Qwen-7B</a>, "✅", "48.7", "34.7", "88.5", "87.8", "21.2", "9.5"]
     ]
   }}
 />
@@ -43,29 +43,33 @@ To further build upon the OpenThoughts-114k and OpenR1-Math mix, we generated ad
 
 To determine the best data sources, we measure the downstream performance of each model on relevant reasoning benchmarks. For code sources, we measure LiveCodeBenchV2. For math sources, we measure HumanEval, MATH500, AMC23, AIME24, GPQADiamond and LiveCodeBenchV2.
 
+<Table
+  data={[
+    { source: 'm-a-p/CodeFeedback-Filtered-Instruction', lcbv2: '0.1761' },
+    { source: 'ajibawa-2023/Code-290k-ShareGPT', lcbv2: '0.1585' },
+    { source: 'cognitivecomputations/dolphin-coder', lcbv2: '0.1448' },
+    { source: 'glaiveai/glaive-code-assistant-v3', lcbv2: '0.1350' },
+    { source: 'ise-uiuc/Magicoder-OSS-Instruct-75K', lcbv2: '0.1174' },
+    { source: 'OpenCoder-LLM/opc-sft-stage2', lcbv2: '0.0861' },
+    { source: 'christopher/rosetta-code', lcbv2: '0.0861' },
+    { source: 'Magpie-Align/Magpie-Qwen2.5-Coder-Pro-300K-v0.1', lcbv2: '0.0705' },
+    { source: 'Multilingual-Multimodal-NLP/McEval-Instruct', lcbv2: '0.0626' },
+    { source: 'bugdaryan/sql-create-context-instruction', lcbv2: '0.0587' },
+    { source: 'nampdn-ai/tiny-codes', lcbv2: '0.0509' },
+    { source: 'bigcode/self-oss-instruct-sc2-exec-filter-50k', lcbv2: '0.0489' },
+    { source: 'bigcode/commitpackft', lcbv2: '0.0431' },
+    { source: 'cfahlgren1/react-code-instructions', lcbv2: '0.0352' },
+    { source: 'SenseLLM/ReflectionSeq-GPT', lcbv2: '0.0235' }
+  ]}
+  columns={[
+    { header: 'Data Source', accessorKey: 'source' },
+    { header: 'LCBv2', accessorKey: 'lcbv2' }
+  ]}
+/>
+
 As seen in the tables below, the top performing math datasets are synthetic datasets from AutoMathInstruct, TigerLab, and Nvidia. We constructed AutoMathInstruct by searching for math related data within AutoMathText and using gpt-4o-mini to form related questions. The top performing code datasets are a mix of human coding questions (e.g. Code-290k-ShareGPT-Vicuna) and synthetic coding questions (e.g.  CodeFeedback-Filtered-Instruction).
 
-<Table
-  data={{
-    headers: [
-      "Model",
-      "Data",
-      "AIME24",
-      "AIME25",
-      "AMC23",
-      "MATH500",
-      "GPQA-D",
-      "LCBv2"
-    ],
-    rows: [
-      [<a href="https://huggingface.co/open-thoughts/OpenThinker2-7B">OpenThinker2-7B</a>, "✅", "50.0", "33.3", "89.5", "88.4", "49.3", "55.6"],
-      [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B">OpenThinker-7B</a>, "✅", "31.3", "23.3", "74.5", "83.2", "42.9", "38.0"],
-      [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B">DeepSeek-R1-Distill-Qwen-7B</a>, "❌", "57.3", "33.3", "92.0", "89.6", "47.3", "48.4"],
-      [<a href="https://huggingface.co/open-r1/OlympicCoder-7B">OlympicCoder-7B</a>, "✅", "20.7", "15.3", "63.0", "74.8", "25.3", "55.4"],
-      [<a href="https://huggingface.co/open-r1/OpenR1-Qwen-7B">OpenR1-Qwen-7B</a>, "✅", "48.7", "34.7", "88.5", "87.8", "21.2", "9.5"]
-    ]
-  }}
-/>
+<INSERT TABLE>
 
 Using 30K questions from each of the top 5 data sources for code and 12.5k questions from each of the top 4 data sources for math on top of our OpenThoughts-114k + OpenR1-Math-Raw mix, we create our final OpenThoughts2-1M dataset. 
 
