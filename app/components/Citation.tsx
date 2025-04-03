@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import confetti from 'canvas-confetti'
 
 export function Citation({ children }: { children: React.ReactNode }) {
   const [copied, setCopied] = React.useState(false);
@@ -11,6 +12,13 @@ export function Citation({ children }: { children: React.ReactNode }) {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    
+    // Trigger confetti
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
   };
 
   if (!children) {
