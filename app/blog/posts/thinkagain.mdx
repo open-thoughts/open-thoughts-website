@@ -18,6 +18,28 @@ Today, we are releasing OpenThinker2-32B and OpenThinker2-7B, two new state of t
       "LCBv2"
     ],
     rows: [
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker2-32B">OpenThinker2-32B</a>, "✅", "76.7", "58.7", "94.0", "90.8", "64.1", "72.5"],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-32B">OpenThinker-32B</a>, "✅", "68.0", "49.3", "95.5", "90.6", "63.5", "68.6"],
+      [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B">DeepSeek-R1-Distill-Qwen-32B</a>, "❌", "74.7", "50.0", "96.5", "90.0", "65.8", "72.3"],
+      [<a href="https://huggingface.co/qihoo360/Light-R1-32B">Light-R1-32B</a>, "✅", "74.7", "58.0", "96.0", "90.4", "62.0", "56.0"],
+      [<a href="https://huggingface.co/simplescaling/s1.1-32B">S1.1-32B</a>, "✅", "59.3", "42.7", "91.5", "87.4", "62.0", "58.7"]
+    ]
+  }}
+/>
+
+<Table
+  data={{
+    headers: [
+      "Model",
+      "Data",
+      "AIME24",
+      "AIME25",
+      "AMC23",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
       [<a href="https://huggingface.co/open-thoughts/OpenThinker2-7B">OpenThinker2-7B</a>, "✅", "50.0", "33.3", "89.5", "88.4", "49.3", "55.6"],
       [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B">OpenThinker-7B</a>, "✅", "31.3", "23.3", "74.5", "83.2", "42.9", "38.0"],
       [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B">DeepSeek-R1-Distill-Qwen-7B</a>, "❌", "57.3", "33.3", "92.0", "89.6", "47.3", "48.4"],
@@ -44,48 +66,52 @@ To further build upon the OpenThoughts-114k and OpenR1-Math mix, we generated ad
 To determine the best data sources, we measure the downstream performance of each model on relevant reasoning benchmarks. For code sources, we measure LiveCodeBenchV2. For math sources, we measure HumanEval, MATH500, AMC23, AIME24, GPQADiamond and LiveCodeBenchV2.
 
 <Table
-  data={[
-    { source: 'm-a-p/CodeFeedback-Filtered-Instruction', lcbv2: '17.6' },
-    { source: 'ajibawa-2023/Code-290k-ShareGPT', lcbv2: '15.9' },
-    { source: 'cognitivecomputations/dolphin-coder', lcbv2: '14.5' },
-    { source: 'glaiveai/glaive-code-assistant-v3', lcbv2: '13.5' },
-    { source: 'ise-uiuc/Magicoder-OSS-Instruct-75K', lcbv2: '11.7' },
-    { source: 'OpenCoder-LLM/opc-sft-stage2', lcbv2: '8.6' },
-    { source: 'christopher/rosetta-code', lcbv2: '8.6' },
-    { source: 'Magpie-Align/Magpie-Qwen2.5-Coder-Pro-300K-v0.1', lcbv2: '7.1' },
-    { source: 'Multilingual-Multimodal-NLP/McEval-Instruct', lcbv2: '6.3' },
-    { source: 'bugdaryan/sql-create-context-instruction', lcbv2: '5.9' },
-    { source: 'nampdn-ai/tiny-codes', lcbv2: '5.1' },
-    { source: 'bigcode/self-oss-instruct-sc2-exec-filter-50k', lcbv2: '4.9' },
-    { source: 'bigcode/commitpackft', lcbv2: '4.3' },
-    { source: 'cfahlgren1/react-code-instructions', lcbv2: '3.5' },
-    { source: 'SenseLLM/ReflectionSeq-GPT', lcbv2: '2.4' }
-  ]}
-  columns={[
-    { header: 'Data Source', accessorKey: 'source' },
-    { header: 'LCBv2 (%)', accessorKey: 'lcbv2' }
-  ]}
+  data={{
+    headers: [
+      "Data Source",
+      "LCBv2 (%)"
+    ],
+    rows: [
+      ["m-a-p/CodeFeedback-Filtered-Instruction", "17.6"],
+      ["ajibawa-2023/Code-290k-ShareGPT", "15.9"],
+      ["cognitivecomputations/dolphin-coder", "14.5"],
+      ["glaiveai/glaive-code-assistant-v3", "13.5"],
+      ["ise-uiuc/Magicoder-OSS-Instruct-75K", "11.7"],
+      ["OpenCoder-LLM/opc-sft-stage2", "8.6"],
+      ["christopher/rosetta-code", "8.6"],
+      ["Magpie-Align/Magpie-Qwen2.5-Coder-Pro-300K-v0.1", "7.1"],
+      ["Multilingual-Multimodal-NLP/McEval-Instruct", "6.3"],
+      ["bugdaryan/sql-create-context-instruction", "5.9"],
+      ["nampdn-ai/tiny-codes", "5.1"],
+      ["bigcode/self-oss-instruct-sc2-exec-filter-50k", "4.9"],
+      ["bigcode/commitpackft", "4.3"],
+      ["cfahlgren1/react-code-instructions", "3.5"],
+      ["SenseLLM/ReflectionSeq-GPT", "2.4"]
+    ]
+  }}
 />
 
 <Table
-  data={[
-    { source: 'TIGER-Lab/MathInstruct', average: '25.1' },
-    { source: 'TIGER-Lab/MATH-plus', average: '24.9' },
-    { source: 'AutoMathInstruct  (ours)', average: '24.7' },
-    { source: 'nvidia/OpenMathInstruct-2', average: '24.1' },
-    { source: 'ai2-adapt-dev/openmath-2-math', average: '23.5' },
-    { source: 'Asap7772/hendrycks-math-mc-llama-sft-intermediate-parallel', average: '23.3' },
-    { source: 'ibivibiv/math_instruct', average: '20.5' },
-    { source: 'ddrg/named_math_formulas', average: '20.4' },
-    { source: 'ajibawa-2023/Maths-College', average: '19.2' },
-    { source: 'deepmind/math_dataset', average: '14.1' },
-    { source: 'allenai/math_qa', average: '13.2' },
-    { source: 'mathmadness/MathCoder', average: '9.1' }
-  ]}
-  columns={[
-    { header: 'Data Source', accessorKey: 'source' },
-    { header: 'Average (%)', accessorKey: 'average' }
-  ]}
+  data={{
+    headers: [
+      "Data Source",
+      "Average (%)"
+    ],
+    rows: [
+      ["TIGER-Lab/MathInstruct", "25.1"],
+      ["TIGER-Lab/MATH-plus", "24.9"],
+      ["AutoMathInstruct  (ours)", "24.7"],
+      ["nvidia/OpenMathInstruct-2", "24.1"],
+      ["ai2-adapt-dev/openmath-2-math", "23.5"],
+      ["Asap7772/hendrycks-math-mc-llama-sft-intermediate-parallel", "23.3"],
+      ["ibivibiv/math_instruct", "20.5"],
+      ["ddrg/named_math_formulas", "20.4"],
+      ["ajibawa-2023/Maths-College", "19.2"],
+      ["deepmind/math_dataset", "14.1"],
+      ["allenai/math_qa", "13.2"],
+      ["mathmadness/MathCoder", "9.1"]
+    ]
+  }}
 />
 
 As seen in the tables below, the top performing math datasets are synthetic datasets from AutoMathInstruct, TigerLab, and Nvidia. We constructed AutoMathInstruct by searching for math related data within AutoMathText and using gpt-4o-mini to form related questions. The top performing code datasets are a mix of human coding questions (e.g. Code-290k-ShareGPT-Vicuna) and synthetic coding questions (e.g.  CodeFeedback-Filtered-Instruction).
