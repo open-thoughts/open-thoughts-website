@@ -49,6 +49,15 @@ We extensively studied the effect of the following steps in our data generation 
 5. Answer filtering
 6. Teacher model selection
 
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3_pipeline.png"
+    alt="OpenThoughts3 Experimental Pipeline"
+    className="rounded-lg"
+
+  />
+</div>
+
 
 We build our pipeline iteratively, ablating the initial steps first and keeping the best choices fixed throughout the remaining ablations.  Our ablations contain over 1,000 controlled experiments across three data domains: math, code, and science.
 
@@ -72,13 +81,27 @@ than filters typical to pre-training data curation that use embeddings or fastTe
 
 Our final pipelines for code, math, and science are presented below. 
 
-
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3_sankey.png"
+    alt="OpenThoughts3 Data Pipeline"
+    className="rounded-lg"
+  />
+</div>
 
 ## Scaling Up
 
 Scaling reasoning datasets is a powerful lever for increasing downstream performance, as we demonstrated scaling from Bespoke-Stratos-17k to OpenThoughts-114k and then again to OpenThoughts2-1M. With the stronger OpenThoughts3 data recipe, we once again take advantage of scale, scaling up to 1.2M samples consisting of 850,000 math, 250,000 code, and 100,000 science instruction and answer pairs. 
 
 We outperform the previous state-of-the-art open reasoning datasets (AM and Nemotron Nano) and clearly demonstrate that more-is-more for reasoning.
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3_scaling.png"
+    alt="OpenThoughts3 Scaling Performance"
+    className="rounded-lg"
+  />
+</div>
 
 ## Conclusion
 
