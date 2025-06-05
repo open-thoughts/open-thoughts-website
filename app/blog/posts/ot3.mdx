@@ -1,0 +1,178 @@
+---
+title: 'OpenThoughts3: A new SOTA Reasoning Data Recipe'
+publishedAt: '2025-06-05'
+summary: 'Pushing the boundaries of open reasoning datasets through rigorous experimentation.'
+---
+Today, we are releasing [OpenThoughts3](https://huggingface.co/datasets/open-thoughts/OpenThoughts3), a new state of the art open-data reasoning dataset. Along with the dataset, we provide a new model [OpenThinker3](https://huggingface.co/open-thoughts/OpenThinker3) that is simply trained with SFT on our curated data.
+<Table
+  data={{
+    headers: [
+      "Model",
+      "Data",
+      "AIME24",
+      "AIME25",
+      "AMC23",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker2-32B">OpenThinker2-32B</a>, "✅", <b>76.7</b>, <b>58.7</b>, "94.0", <b>90.8</b>, "64.1", <b>72.5</b>],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-32B">OpenThinker-32B</a>, "✅", "68.0", "49.3", "95.5", "90.6", "63.5", "68.6"],
+      [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B">R1-Distill-32B</a>, "❌", "74.7", "50.0", <b>96.5</b>, "90.0", <b>65.8</b>, "72.3"],
+      [<a href="https://huggingface.co/qihoo360/Light-R1-32B">Light-R1-32B</a>, "✅", "74.7", "58.0", "96.0", "90.4", "62.0", "56.0"],
+      [<a href="https://huggingface.co/simplescaling/s1.1-32B">S1.1-32B</a>, "✅", "59.3", "42.7", "91.5", "87.4", "62.0", "58.7"]
+    ]
+  }}
+/>
+
+When we [launched the Open Thoughts project](https://www.open-thoughts.ai/blog/launch), our goal was to build a SFT dataset in the open and train a [DeepSeek-R1-Distill-Qwen-32B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B) level reasoning model. We have now achieved that goal, averaged over our reasoning evaluations and we outperform [DeepSeek-R1-Distill-Qwen-32B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B). 
+
+We used two approaches to create [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M) by adding to [OpenThoughts-114K](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k):
+- Leveraging existing reasoning data from the open source community
+- Sourcing and generating new code and math reasoning data
+
+<Table
+  data={{
+    headers: [
+      "Model",
+      "Data",
+      "AIME24",
+      "AIME25",
+      "AMC23",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker2-7B">OpenThinker2-7B</a>, "✅", "50.0", "33.3", "89.5", "88.4", <b>49.3</b>, <b>55.6</b>],
+      [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B">OpenThinker-7B</a>, "✅", "31.3", "23.3", "74.5", "83.2", "42.9", "38.0"],
+      [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B">R1-Distill-7B</a>, "❌", <b>57.3</b>, "33.3", <b>92.0</b>, <b>89.6</b>, "47.3", "48.4"],
+      [<a href="https://huggingface.co/open-r1/OlympicCoder-7B">OlympicCoder-7B</a>, "✅", "20.7", "15.3", "63.0", "74.8", "25.3", "55.4"],
+      [<a href="https://huggingface.co/open-r1/OpenR1-Qwen-7B">OpenR1-Math-7B</a>, "✅", "48.7", <b>34.7</b>, "88.5", "87.8", "21.2", "9.5"]
+    ]
+  }}
+/>
+
+## Leveraging Existing Reasoning Data
+The open source community has released a flurry of reasoning datasets in the last two months. We aimed to build on [OpenThoughts-114K](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) by adding new data from new external datasets to achieve a greater diversity and scale. We finetuned the [Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) model on [GeneralThought-430K](https://huggingface.co/datasets/GeneralReasoning/GeneralThought-430K), [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw), [Llama-Nemotron-Post-Training-Dataset-v1](https://huggingface.co/datasets/nvidia/Llama-Nemotron-Post-Training-Dataset-v1), [SYNTHETIC-1](https://huggingface.co/datasets/PrimeIntellect/SYNTHETIC-1), [KodCode-V1](https://huggingface.co/datasets/KodCode/KodCode-V1) and measured downstream performance on our reasoning evaluation suite. Out of the datasets that we used in these experiments, we found that [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw) performed the best overall so we include it in [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M). 
+
+
+<Table
+  data={{
+    headers: [
+      "Dataset",
+      "Rows",
+      "AIME24",
+      "AIME25",
+      "AMC23",
+      "MATH500",
+      "GPQA-D",
+      "LCBv2"
+    ],
+    rows: [
+      [<a href="https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k">OpenThoughts-114K</a>, "114k", "31.3", "28.0", "72.0", "84.4", "42.9", "41.8"],
+      [<a href="https://huggingface.co/datasets/GeneralReasoning/GeneralThought-430K">GeneralThought-430K</a>, "430k", "17.3", "14.7", "55.0", "75.2", "37.4", "23.1"],
+      [<a href="https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw">OpenR1-Math-Raw</a>, "669k", "46.7", "30.7", "80.5", "86.2", "44.4", "16.8"],
+      [<a href="https://huggingface.co/datasets/nvidia/Llama-Nemotron-Post-Training-Dataset-v1">Nemotron</a>, "1M", "8.7", "1.3", "38.0", "61.0", "32.8", "18.5"],
+      [<a href="https://huggingface.co/datasets/PrimeIntellect/SYNTHETIC-1">SYNTHETIC-1</a>, "900k", "18.7", "16.7", "61.0", "77.2", "37.9", "29.0"],
+      [<a href="https://huggingface.co/datasets/KodCode/KodCode-V1">KodCode-V1</a>, "484K", "13.3", "8.0", "48.5", "69.4", "35.5", "35.9"]
+    ]
+  }}
+/>
+
+
+## Generating New Reasoning Data
+
+To further build upon the [OpenThoughts-114K](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) and [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw) mix, we generated additional math and code reasoning data. To do this, we try 26 different approaches for sourcing and generating math and code questions. For each strategy, we sample 5,000 questions, distill with [DeepSeek-R1](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B) and finetune [Qwen-2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) on the resulting data. 
+
+To determine the best data sources, we measure the downstream performance of each model on relevant [reasoning benchmarks](https://huggingface.co/collections/ryanmarten/reasoning-datasets-67aa88352e5d6cc89c1dd938). For code sources, we measure LiveCodeBenchV2. For math sources, we measure HumanEval, MATH500, AMC23, AIME24, GPQADiamond and LiveCodeBenchV2.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div>
+    <Table
+      data={{
+        headers: [
+          "Code Data Source",
+          "LCBv2"
+        ],
+        rows: [
+          [<a href="https://huggingface.co/datasets/m-a-p/CodeFeedback-Filtered-Instruction">CodeFeedback-Filtered-Instruction</a>, "17.6"],
+          [<a href="https://huggingface.co/datasets/ajibawa-2023/Code-290k-ShareGPT">Code-290k-ShareGPT</a>, "15.9"],
+          [<a href="https://huggingface.co/datasets/cognitivecomputations/dolphin-coder">dolphin-coder</a>, "14.5"],
+          [<a href="https://huggingface.co/datasets/glaiveai/glaive-code-assistant-v3">glaive-code-assistant-v3</a>, "13.5"],
+          [<a href="https://huggingface.co/datasets/ise-uiuc/Magicoder-OSS-Instruct-75K">Magicoder-OSS-Instruct-75K</a>, "11.7"],
+          [<a href="https://huggingface.co/datasets/OpenCoder-LLM/opc-sft-stage2">opc-sft-stage2</a>, "8.6"],
+          [<a href="https://huggingface.co/datasets/christopher/rosetta-code">rosetta-code</a>, "8.6"],
+          [<a href="https://huggingface.co/datasets/Magpie-Align/Magpie-Qwen2.5-Coder-Pro-300K-v0.1">Magpie-Qwen2.5-Coder-Pro-300K</a>, "7.1"],
+          [<a href="https://huggingface.co/datasets/Multilingual-Multimodal-NLP/McEval-Instruct">McEval-Instruct</a>, "6.3"],
+          [<a href="https://huggingface.co/datasets/bugdaryan/sql-create-context-instruction">sql-create-context-instruction</a>, "5.9"],
+          [<a href="https://huggingface.co/datasets/nampdn-ai/tiny-codes">tiny-codes</a>, "5.1"],
+          [<a href="https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2-exec-filter-50k">self-oss-instruct-sc2-exec-filter-50k</a>, "4.9"],
+          [<a href="https://huggingface.co/datasets/bigcode/commitpackft">commitpackft</a>, "4.3"],
+          [<a href="https://huggingface.co/datasets/cfahlgren1/react-code-instructions">react-code-instructions</a>, "3.5"],
+          [<a href="https://huggingface.co/datasets/SenseLLM/ReflectionSeq-GPT">ReflectionSeq-GPT</a>, "2.4"]
+        ]
+      }}
+    />
+  </div>
+  <div>
+    <Table
+      data={{
+        headers: [
+          "Math Data Source",
+          "Average"
+        ],
+        rows: [
+          [<a href="https://huggingface.co/datasets/TIGER-Lab/MathInstruct">MathInstruct</a>, "25.1"],
+          [<a href="https://huggingface.co/datasets/TIGER-Lab/MATH-plus">MATH-plus</a>, "24.9"],
+          ["AutoMathInstruct  (ours)", "24.7"],
+          [<a href="https://huggingface.co/datasets/nvidia/OpenMathInstruct-2">OpenMathInstruct-2</a>, "24.1"],
+          [<a href="https://huggingface.co/datasets/ai2-adapt-dev/openmath-2-math">openmath-2-math</a>, "23.5"],
+          [<a href="https://huggingface.co/datasets/Asap7772/hendrycks-math-mc-llama-sft-intermediate-parallel">hendrycks-math-mc</a>, "23.3"],
+          [<a href="https://huggingface.co/datasets/ibivibiv/math_instruct">math_instruct</a>, "20.5"],
+          [<a href="https://huggingface.co/datasets/ddrg/named_math_formulas">named_math_formulas</a>, "20.4"],
+          [<a href="https://huggingface.co/datasets/ajibawa-2023/Maths-College">Maths-College</a>, "19.2"],
+          [<a href="https://huggingface.co/datasets/deepmind/math_dataset">math_dataset</a>, "14.1"],
+          [<a href="https://huggingface.co/datasets/allenai/math_qa">math_qa</a>, "13.2"],
+          [<a href="https://huggingface.co/datasets/mathmadness/MathCoder">MathCoder</a>, "9.1"]
+        ]
+      }}
+    />
+  </div>
+</div>
+
+As seen in the tables above, the top performing math datasets are synthetic datasets from AutoMathInstruct, [TigerLab](https://huggingface.co/TIGER-Lab), and [Nvidia](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2). We constructed AutoMathInstruct by searching for math related data within [AutoMathText](https://huggingface.co/datasets/math-ai/AutoMathText) and using gpt-4o-mini to form related questions. The top performing code datasets are a mix of human coding questions (e.g. [Code-290k-ShareGPT-Vicuna](https://huggingface.co/datasets/cognitivecomputations/Code-290k-ShareGPT-Vicuna)) and synthetic coding questions (e.g.  [CodeFeedback-Filtered-Instruction](https://huggingface.co/datasets/m-a-p/CodeFeedback-Filtered-Instruction)).
+
+Using 30K questions from each of the top 5 data sources for code and 12.5k questions from each of the top 4 data sources for math on top of our [OpenThoughts-114k](https://huggingface.co/datasets/open-thoughts/open-thoughts-114k) + [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw) mix, we create our final [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M) dataset. 
+
+
+## OpenThoughts2-1M
+OpenThoughts2 is a combination of [OpenThoughts-114k](https://huggingface.co/datasets/open-thoughts/open-thoughts-114k), verified reasoning traces from [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw), and the questions from our best math and code sources. This is visualized in the diagram below. Our full [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M) dataset is released on HuggingFace. We will soon be adding the data generation code for [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M) to [our GitHub repository](https://github.com/open-thoughts/open-thoughts).
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/openthoughts2-1M-diagram.png"
+    alt="OpenThoughts2-1M Data Curation Diagram"
+    className="rounded-lg"
+    width={1000}
+    height={1000}
+  />
+</div>
+
+## Evaluation Details
+We evaluate OpenThinker2 on a set of popular reasoning benchmarks, running each benchmark multiple times (5x - AIME24, AIME25, AMC23 and 3x - LiveCodeBenchV2, GPQA-Diamond) and reporting the average accuracy. We set the temperature to 0.7 and the maximum token length to 32,768 during sampling. Our training datasets are decontaminated by removing samples with over 90% indel similarity against evaluation problems. All evaluations are conducted using our open-source framework [Evalchemy](https://github.com/mlfoundations/Evalchemy/blob/main/README.md), which we detailed in our [previous post on reasoning evaluations](https://www.openthoughts.ai/blog/measure).
+
+## Conclusion
+[OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M) is a combination of [OpenThoughts-114k](https://huggingface.co/datasets/open-thoughts/open-thoughts-114k), verified reasoning traces from [OpenR1-Math](https://huggingface.co/datasets/open-r1/OpenR1-Math-Raw), and our newly generated data. We finetune [Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) and [Qwen2.5-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-32B-Instruct) on [OpenThoughts2-1M](https://huggingface.co/datasets/open-thoughts/OpenThoughts2-1M) to yield [OpenThinker2-7B](https://huggingface.co/open-thoughts/OpenThinker2-7B) and [OpenThinker2-32B](https://huggingface.co/open-thoughts/OpenThinker2-32B). When compared with other reasoning models created from the same base, [OpenThinker2-32B](https://huggingface.co/open-thoughts/OpenThinker2-32B) outperforms all other open-data models. Since all OpenThinker models have been trained only with SFT, we expect that RL post-training can further improve their performance.
+
+We are excited for the research community to continue building together on these new reasoning models and datasets. If you have any questions or want to collaborate, feel free to [raise an issue](https://github.com/open-thoughts/open-thoughts/issues/new) on our [GitHub](https://github.com/open-thoughts/open-thoughts) or reach out to [us on X](https://x.com/etash_guha/status/1907837121995678002). 
+
+### Citation
+<Citation>{`@misc{openthoughts,
+  author = {Team, OpenThoughts},
+  month = jan,
+  title = {{Open Thoughts}},
+  howpublished = {https://open-thoughts.ai},
+  year = {2025}
+}`}</Citation>
