@@ -1,1 +1,1 @@
-Open Thoughts
+Open Thoughts Website
