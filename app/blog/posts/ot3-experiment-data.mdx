@@ -1,0 +1,94 @@
+---
+title: 'OpenThoughts3 - 1000 models evaluated'
+publishedAt: '2025-06-23'
+summary: 'OpenThoughts data generation involved a wealth of experiments, model training, and evaluations. We release experimental results and analysis tools.'
+---
+
+OpenThoughts data generation involved a wealth of experiments, model training, and evaluations. In addition to opening the resulting dataset and models, we now release a large set of our experimental results gathered along the way and tools to analyse them in [our HuggingFace spaces](https://huggingface.co/spaces/mlfoundations/OpenThoughts_data_explorer). Our meta-analysis of evaluation results over hundreds of models gives insight into the reasoning benchmarks.
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3-huggingface-space-screenshot.png"
+    alt="OpenThoughts3 HuggingFace Space Screenshot"
+    width={624}
+    height={395}
+    className="rounded-lg"
+  />
+</div>
+
+[Evalchemy](https://github.com/mlfoundations/evalchemy) allowed us to run and log the evaluations of a thousand models. The data logs lead us to fascinating observations about cross-benchmark comparisons.
+
+We consider 12 reasoning-focused benchmarks in 4 categories: Math, Code, Science, and General. The first observation is that model ranking across different benchmarks all positively correlate, and more so within the same category.
+
+<div className="flex justify-center my-8">
+      <Image
+      src="/ot3-benchmark-correlations-heatmap.png"
+      alt="Benchmark Correlations Heatmap - Cross-benchmark model ranking correlations across Math, Code, Science, and General reasoning categories"
+      width={624}
+      height={556}
+      className="rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+      priority
+      quality={100}
+      unoptimized
+    />
+</div>
+
+<div className="text-sm text-gray-600 dark:text-gray-400 text-center mt-2 mb-8">
+  <em>Correlation matrix showing how model rankings agree across different reasoning benchmarks. Darker colors indicate stronger correlations.</em>
+</div>
+
+These correlations hide interesting patterns:
+
+Some benchmark correlations seem extremely weak and mainly show that stronger models usually generalize, but these benchmarks measure different properties. Other benchmarks, such as AIME24 and AIME25, show robust agreement.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+  <div className="flex justify-center">
+    <Image
+      src="/ot3-hle-aime25-correlation.png"
+      alt="HLE vs AIME25 Correlation"
+      width={322}
+      height={320}
+      className="rounded-lg"
+    />
+  </div>
+  <div className="flex justify-center">
+    <Image
+      src="/ot3-aime24-aime25-correlation.png"
+      alt="AIME24 vs AIME25 Correlation"
+      width={326}
+      height={322}
+      className="rounded-lg"
+    />
+  </div>
+</div>
+
+Another typical pattern shows good agreement between model rankings using two benchmarks, but the scores show signs of saturation. For example, AMC23 progress shows a diminishing return compared to AIME25. Stronger models approach a perfect score on AMC23.
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3-amc23-aime25-saturation.png"
+    alt="AMC23 vs AIME25 Saturation Analysis"
+    width={988}
+    height={540}
+    className="rounded-lg"
+  />
+</div>
+
+Comparing other benchmarks, such as AMC23 vs JEEBench, shows other interesting patterns: the best models and the weakest models both correlate fairly strongly, but intermediate models are challenging to distinguish, resulting in a good score correlation (Pearson) but a relatively weak model ranking correlation (Kendall).
+
+Model performance on reasoning benchmarks might be challenging to navigate. To help make sense of them, we propose a model ranking system that is robust to missing evaluation results over a selected set of benchmarks. We use median ranking over the set of benchmarks and fill in the missing rankings using Kendall correlation estimation. When considering all four categories, Gemini 2.5 Pro is at the top of the leaderboard. However, if we only consider our two science benchmarks (GPQA and JEEBench), Deepseek's new R1 model (05/28) ranks first.
+
+Finally, you can explore result uncertainties for each benchmark and how they influence benchmark correlations.
+
+[Explore the data yourself on our HuggingFace Spaces page.](https://huggingface.co/spaces/mlfoundations/OpenThoughts_data_explorer)
+
+{/* ## Interactive Data Explorer
+
+<iframe
+  id="ot3-data-explorer"
+  src="https://mlfoundations-OpenThoughts_data_explorer.hf.space"
+  frameBorder="0"
+  width="100%"
+  height="450"
+  className="rounded-lg border my-8"
+></iframe> */}
