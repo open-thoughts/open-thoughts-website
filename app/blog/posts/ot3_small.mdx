@@ -1,0 +1,57 @@
+---
+title: 'OpenThoughts3-1.5B - Reasoning with Smaller Models'
+publishedAt: '2025-07-11'
+summary: 'Training smaller models to become more powerful reasoners'
+---
+
+
+
+We are releasing [OpenThinker3-1.5B](https://huggingface.co/open-thoughts/OpenThinker3-1.5B), a new lightweight model fine-tuned from [Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct) using our [OpenThoughts3-1.2M](https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M) dataset. OpenThinker3-1.5B is the top-performing SFT-only model at its size, outperforming [R1-Distill-1.5B](http://deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B) by an average of 10.1 points across various math, code, and science datasets. Its compact size results in significantly lower memory requirements, enabling faster training and inference. This makes it ideal for quick experimentation in resource-constrained environments, deployment on edge devices, and RL for reasoning research.
+
+
+## Data Composition
+
+To train OpenThinker3-1.5B, we gathered math, code, and science questions from various sources and filtered them through a comprehensive data pipeline. This pipeline involved several steps, including source mixing, question filtering, and generating multiple answers. We then scaled up this pipeline to reach 1.2M question-answer samples. See our OpenThoughts [paper](https://arxiv.org/abs/2506.04178) for full details on how we constructed the [OpenThoughts3-1.2M](https://huggingface.co/datasets/open-thoughts/OpenThoughts3-1.2M) dataset.
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3_pipeline.png"
+    alt="OpenThoughts3 Experimental Pipeline"
+    width={2225}
+    height={297}
+    className="rounded-lg"
+  />
+</div>
+
+
+
+
+
+## Model Performance
+
+Our model significantly outperforms existing models such as [R1-Distill-1.5B](http://deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B). Moreover, the model is only two points worse than [Qwen3-1.7B](https://huggingface.co/Qwen/Qwen3-1.7B), a closed-data model from a frontier lab. Furthermore, we achieve SOTA on several benchmarks at this model scale, including AIME24, AMC23, LiveCodeBenchv2, HMMT, and AIME25. We also highlight that the excellent Nemotron model from Nvidia is powerful, especially on CodeElo and CodeForces.
+
+To achieve this performance, we conducted a hyperparameter sweep to identify a strong set of hyperparameters at the 1.5B scale. We found that the model benefited from a higher learning rate and could be trained for a larger number of epochs before saturation. Our full set of hyperparameters can be found in the HuggingFace [model card](https://huggingface.co/open-thoughts/OpenThinker3-1.5B). 
+
+We are looking forward to seeing what the community builds with [OpenThinker3-1.5B](https://huggingface.co/open-thoughts/OpenThinker3-1.5B)!
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/ot3_15b_results.png"
+    alt="OpenThoughts3-1.5B Evaluation Results"
+    width={2225}
+    height={297}
+    className="rounded-lg"
+  />
+</div>
+
+### Citation
+<Citation>{`@misc{guha2025openthoughtsdatarecipesreasoning,
+      title={OpenThoughts: Data Recipes for Reasoning Models}, 
+      author={Etash Guha and Ryan Marten and Sedrick Keh and Negin Raoof and Georgios Smyrnis and Hritik Bansal and Marianna Nezhurina and Jean Mercat and Trung Vu and Zayne Sprague and Ashima Suvarna and Benjamin Feuer and Liangyu Chen and Zaid Khan and Eric Frankel and Sachin Grover and Caroline Choi and Niklas Muennighoff and Shiye Su and Wanjia Zhao and John Yang and Shreyas Pimpalgaonkar and Kartik Sharma and Charlie Cheng-Jie Ji and Yichuan Deng and Sarah Pratt and Vivek Ramanujan and Jon Saad-Falcon and Jeffrey Li and Achal Dave and Alon Albalak and Kushal Arora and Blake Wulfe and Chinmay Hegde and Greg Durrett and Sewoong Oh and Mohit Bansal and Saadia Gabriel and Aditya Grover and Kai-Wei Chang and Vaishaal Shankar and Aaron Gokaslan and Mike A. Merrill and Tatsunori Hashimoto and Yejin Choi and Jenia Jitsev and Reinhard Heckel and Maheswaran Sathiamoorthy and Alexandros G. Dimakis and Ludwig Schmidt},
+      year={2025},
+      eprint={2506.04178},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2506.04178}, 
+}`}</Citation>
