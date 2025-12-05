@@ -5,6 +5,7 @@ import { highlight } from 'sugar-high'
 import React from 'react'
 import { Citation } from './Citation'
 import { BarChart } from './charts/BarChart'
+import { BlogPosts } from './posts'
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -107,6 +108,7 @@ let components = {
   Table,
   Citation,
   BarChart,
+  BlogPosts,
 }
 
 interface CustomMDXProps {

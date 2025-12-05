@@ -1,7 +1,7 @@
-import { BlogPosts } from 'app/components/posts'
 import { CustomMDX } from 'app/components/mdx'
 import { readMDXFile } from 'app/blog/utils'
 import { MailchimpForm } from 'app/components/MailchimpForm'
+import { BlogPosts } from 'app/components/posts'
 import path from 'path'
 
 export default async function Page() {
@@ -28,9 +28,22 @@ export default async function Page() {
         <CustomMDX source={content} />
       </article>
 
-      <div className="my-8">
-        <BlogPosts />
+      {/* Blog sections outside prose to avoid spacing issues */}
+      <div className="prose mt-8">
+        <h2 id="openthoughts-agent">
+          <a href="#openthoughts-agent" className="anchor" />
+          OpenThoughts-Agent
+        </h2>
       </div>
+      <BlogPosts category="OpenThoughts-Agent" />
+
+      <div className="prose mt-8">
+        <h2 id="openthoughts">
+          <a href="#openthoughts" className="anchor" />
+          OpenThoughts
+        </h2>
+      </div>
+      <BlogPosts category="OpenThoughts" />
 
       {/* Styled citation, rendered via MDX so it uses the site's <Citation> component */}
       <article className="prose mt-12">

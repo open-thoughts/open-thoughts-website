@@ -51,7 +51,7 @@ export function Navbar() {
             className="transition-all hover:text-neutral-800 dark:hover:text-neutral-400 flex align-middle relative py-1 px-2 m-1 items-center"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://github.com/open-thoughts/open-thoughts"
+            href="https://github.com/open-thoughts"
           >
             <ArrowIcon  />
             <p className="ml-2 h-7">github</p>
