@@ -4,57 +4,104 @@ publishedAt: '2025-12-05'
 summary: 'Curating the best open agent datasets.'
 category: 'OpenThoughts-Agent'
 ---
-We are announcing OpenThoughts, an open-source effort to curate the best open reasoning datasets. OpenThoughts is a collaboration led by [Bespoke Labs](https://www.bespokelabs.ai/) and the [DataComp](https://www.datacomp.ai/) community from Stanford, UC Berkeley, UT Austin, UW, UCLA, UNC, TRI, and LAION. 
 
-<div className="flex justify-center my-8">
-  <Image
-    src="/open_thoughts_agent.png"
-    alt="OpenThoughts-Agent Project"
-    width={600}
-    height={400}
-    className="rounded-lg"
-  />
-</div>
+Today, we are announcing OpenThoughts-Agent, an open-source effort to curate the best datasets for training agents. Our first release includes datasets, models and our research codebase; OpenThinker-Agent-8B is the best model of its size on Terminal-Bench 2.0 and SWE-Bench.
 
-Recent breakthroughs such as [SkyT1](https://novasky-ai.github.io/posts/sky-t1/), [STILL-2](https://arxiv.org/abs/2412.09413), and [DeepSeek-R1](https://github.com/deepseek-ai/DeepSeek-R1) have shown that a few hundred thousand reasoning demonstrations suffice to substantially improve the reasoning capabilities of a language model. With the release of DeepSeek-R1, such thinking demonstrations can now be synthetically created at low cost and at scale.
+We built OpenThinker-Agent-8B in two stages: supervised fine-tuning, followed by reinforcement learning. Each stage required its own data pipeline – RL tasks (instructions, environments, and verifiers) and SFT traces from strong teacher agents completing tasks.
 
-While this process of reasoning distillation works surprisingly well, the corresponding datasets and data generation strategies unfortunately remain closed. Moreover, there is a rich design space in data generation for reasoning that the community is only beginning to explore.
+Our first set of release artifacts are:
 
-The goal of OpenThoughts is to bridge this gap and create state-of-the-art open reasoning datasets. In the process, we are publicly iterating on and sharing the best datasets and data recipes for reasoning data. We invite the community to join us to build, explore, and push the frontier of reasoning models forward together. 
+- Model
+- SFT-only Model
+- SFT Data (Traces)
+- Benchmark (Dev Set)
+- [Codebase](https://github.com/open-thoughts/OpenThoughts-Agent)
 
-<Table
-  data={{
-    headers: [
-      "Model",
-      "AIME24",
-      "MATH500",
-      "GPQA-D",
-      "LCB Easy",
-      "LCB Med",
-      "LCB Hard"
-    ],
-    rows: [
-      [<a href="https://huggingface.co/open-thoughts/OpenThinker-7B">OpenThinker-7B</a>, "31.3", "83.0", "42.4", "75.3", "28.6", "6.5"],
-      [<a href="https://huggingface.co/bespokelabs/Bespoke-Stratos-7B">Bespoke-Stratos-7B</a>, "22.7", "79.6", "38.9", "71.4", "25.2", "0.8"],
-      [<a href="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B">DeepSeek-R1-Distill-Qwen-7B</a>, "60.0", "88.2", "46.9", "79.7", "45.1", "14.6"],
-      ["gpt-4o-2024-08-06", "8.7", "75.8", "46.5", "87.4", "42.7", "8.9"],
-      ["o1-mini", "64.0", "85.6", "60.0", "92.8", "74.7", "39.8"]
-    ]
-  }}
-/>
+OpenThoughts-Agent is an ongoing effort.
 
-Today, we are also releasing our first dataset [Open-Thoughts-114k](https://huggingface.co/datasets/open-thoughts/open-thoughts-114k) and model [Open-Thinker-7B](https://huggingface.co/open-thoughts/OpenThinker-7B) based on Qwen-2.5-7B-Instruct. We scaled the data strategy from [Bespoke-Stratos-17k](https://huggingface.co/datasets/bespokelabs/bespoke-stratos-17k), resulting in a significant improvement over [Bespoke-Stratos-7B](https://huggingface.co/bespokelabs/bespoke-stratos-7B). The numbers reported in the table above are evaluated with our open-source tool [Evalchemy](https://github.com/mlfoundations/evalchemy). 
+The next phase of our project is iterating on RL data recipes. We have built the training infra (integrating Harbor with SkyRL) for RL on terminal bench format data. Join our PUBLIC DISCORD to get involved.
 
+Our RL pipeline has been robustly tested and shows strong reward curves on sample data; iterating on RL data to produce better models will be a key part of our second release, and we particularly welcome contributions in this area.
 
-We are just getting started. A new field of exciting research has just opened up. If you want to contribute or sponsor the OpenThoughts effort, please [get in touch](mailto:hello@open-thoughts.ai) or raise an issue on [GitHub](https://github.com/open-thoughts/open-thoughts). Come and join us on this journey!
+## Results
 
-### Citation
-<Citation>{`@misc{guha2025openthoughtsdatarecipesreasoning,
-      title={OpenThoughts: Data Recipes for Reasoning Models}, 
-      author={Etash Guha and Ryan Marten and Sedrick Keh and Negin Raoof and Georgios Smyrnis and Hritik Bansal and Marianna Nezhurina and Jean Mercat and Trung Vu and Zayne Sprague and Ashima Suvarna and Benjamin Feuer and Liangyu Chen and Zaid Khan and Eric Frankel and Sachin Grover and Caroline Choi and Niklas Muennighoff and Shiye Su and Wanjia Zhao and John Yang and Shreyas Pimpalgaonkar and Kartik Sharma and Charlie Cheng-Jie Ji and Yichuan Deng and Sarah Pratt and Vivek Ramanujan and Jon Saad-Falcon and Jeffrey Li and Achal Dave and Alon Albalak and Kushal Arora and Blake Wulfe and Chinmay Hegde and Greg Durrett and Sewoong Oh and Mohit Bansal and Saadia Gabriel and Aditya Grover and Kai-Wei Chang and Vaishaal Shankar and Aaron Gokaslan and Mike A. Merrill and Tatsunori Hashimoto and Yejin Choi and Jenia Jitsev and Reinhard Heckel and Maheswaran Sathiamoorthy and Alexandros G. Dimakis and Ludwig Schmidt},
-      year={2025},
-      eprint={2506.04178},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2506.04178}, 
+OpenThinker-Agent-8B is the best model of its size on Terminal-Bench 2.0 and SWE-Bench. It's also the best on our brand new TBOT (Terminal-Bench Open Thoughts) benchmark, curated especially for this project (see our evals section for more). All of these benchmarks are historically very hard for small models, with even Qwen3 8B, generally a very strong model on benchmarks, achieving low accuracy.
+
+This is just the first step. In the near future, we plan to train more models on more data, start working with larger models and MoEs, and experiment with more sophisticated data pipelines.
+
+## Data
+
+We are excited to release OTA-1, our first official OpenThoughts-Agent dataset! OTA-1 is an SFT trace dataset containing approximately 30,000 traces drawn from three different data sources we curate: nl2bash (simple synthetically generated tasks where the agent has to format shell commands effectively), stackoverflow (tasks generated from StackExchange posts), and InferredBugs is a set of bugs in C# and Java collected by Microsoft that we turned into tasks.
+
+We define a task as a triplet of an instruction in the form of a markdown file, an environment defined by a DockerFile, and a verifier in the form of pytests. The verifier is optional in the SFT setting). All of our environments in this release are generic Ubuntu DockerFiles. To find the best way to generate instructions, we ablated 15 different approaches, selecting from both existing sources such as Nemo, SWESmith and Mind2Web, and those we created, such as StackExchange Overflow, Freelancer and Taskmaster. For each source, we generate approximately 10,000 tasks and let GPT-5-Nano solve each task once, resulting in a 10,000 trace SFT dataset. We then evaluated each model on our TBOT dev set.
+
+The second design choice we ablated was the choice of teacher. One would expect that the better the teacher model is on TerminalBench, the better it performs; surprisingly, we find that this is not the case. Rather, varying teachers in the GPT model family did not improve performance, up to and including the best model on TerminalBench itself, GPT5. However, using GLM-4.6 as a teacher led to almost a 2x improvement in downstream score.
+
+## Supervised Finetuning
+
+Similar to OpenThoughts, the OpenThoughts-Agent SFT pipeline utilizes a fork of the popular [Llama-Factory](https://github.com/mlfoundations/llama-factory) framework. Because we knew we would be training a lot of models, we paid a great deal of attention to optimizing our SFT pipeline to make it as efficient and precise as possible – to paraphrase Yejin Choi and Deadpool, we aimed for "maximum effort" SFT!
+
+### Efficiency
+
+Our profiling of Qwen3-8B training compared DeepSpeed Zero-3 against PyTorch FSDP, and explored the interactions between optimizer/parameter offloading and extending sequence length. Every run used the same dataset for three epochs with FlashAttention-2 built from source, liger kernels enabled, torch.compile disabled, and an 8x H100 80 GB node (1.5 TB RAM, 128 CPUs).
+
+FSDP v1 without offload reported the highest TFLOPS, yet its wall-clock matched DeepSpeed Zero-3 without offload at 32 k context, suggesting accounting differences rather than real gains. DeepSpeed Zero-3 is therefore the balanced choice for medium contexts, while moving to 123 k–204 k tokens showed that adding optimizer+parameter offload restores utilization (0.196 MFU vs. 0.180) and trims runtime by ~8 minutes, so full offload is the better long-context posture despite lower raw TFLOPS.
+
+Supporting observations: FA2 from source was more efficient and stable than HF kernels implementations of flash attention, torch.compile only helped with sdpa/HF attention, FSDP v2 added instability with no speedup, ALST can be saved for larger or MoE models, and neither CCE nor FP8 helped at the 8B scale.
+
+Net guidance: DeepSpeed Zero-3 without offload for ≤32 k, and the same stack with full offloading once we chase 100 k+ contexts.
+
+### Precision
+
+In pursuit of higher precision training, we conducted extensive hyperparameter ablations. We found the best trade-off between a comprehensive (and therefore expensive) grid search and an excessively optimistic "optimize everything at once" strategy consisted of optimizing one parameter at a time, fixing it, and then optimizing the next. We used an expanding boundary search strategy, extending our search space if the best result occurred at the extreme of our search space. We optimized solely against our TBOT dev set, recording scores on other benchmarks for reference purposes.
+
+## Reinforcement Learning
+
+RL will be a key part of the next phase of OT-Agent. We have built the training infra by integrating SkyRL and Harbor and robustly tested it with the recent massive launching of experiments. Preliminary results are showing early signs of life (e.g., with a SFT'd model on NL2Bash as the base model, we got 4.9% -> 6.5% for TBench2 after RL on a R2EGym subset, and 16.1% -> 18.5% for TBOT after RL on Wikitable Format Conversion).
+
+GRPO on a model SFT'd on nl2bash, using a verifiable synthetic dataset wikitable formatting, coupled with the evaluation curve (mean@8 on TBOT, with max-turns set to 32).
+
+### SkyRL + Harbor
+
+While most existing open RL recipes define the agents and tools within the RL framework, the RL effort of OT-Agent uses an existing agent harness, Harbor, so that the SFT team (when generating agentic traces), Eval team, and RL team can all share a unified agent harness. While this avoids duplicated engineering effort and agent mismatch across the stages of the project (only one copy of agent code across the project), this brings several challenges to RL, requiring: 1) robust fault tolerance, 2) on-policy training via co-designing of agent and RL frameworks.
+
+### Data filtration
+
+During rollout, the agent may fail due to various reasons (unrelated to model capability) – the 3rd-party container provider's transient errors, malformatted tasks, or timeout due to various reasons. To address, we filter the data rigorously. Where our SFT filtration process optimized for speed, we quickly learned that RL tends to be much more sensitive to the specifics of each task. We developed a four-stage filtration script which subselected from the pool of available tasks, discarding those that had flaky or slow verifiers, containers that took too long to build or tear down, and, optionally, those where GPT-5 Codex was unable to solve the problem in a single pass. This filtration process tended to remove between 25 and 75% of tasks, and resulted in much cleaner RL reward signal. Despite this, if we still encounter errors during RL's rollout, we simply mask out the data so that it does not contribute to model updates. While this harms reproducibility, it makes iterating experiments and searching for signal from datasets faster.
+
+### Co-designing the agent and RL
+
+Another issue is making RL on-policy. Agent harnesses are typically written without RL in mind, which requires the training to be on-policy. However, agent harnesses may do things like summarization when about to run out of context, among others. There are two options:
+
+1. Disable summarization and keep all thinking tokens (e.g. for Qwen3 models)
+2. Perform book-keeping of each turn's raw token IDs prefilled and decoded, where we can do various context management things (e.g. thinking tokens stripping (default behavior of Qwen3), or even summarization – default behavior of Harbor's Terminus 2).
+
+Harbor was made RL-friendly during the effort of OT-Agent, making it possible to perform either option: https://github.com/laude-institute/harbor/pull/94
+
+## Evaluation
+
+Because Terminal-Bench 2.0 is calibrated for frontier models, small open-source models tend to struggle to get any meaningful score. Because of this, we quickly found that Terminal-Bench 2.0 wasn't the ideal benchmark for marking incremental progress with our data pipeline. Fortunately, under the supervision of Mike Merrill, Alex Shaw and Negin Raoof, and with the help of dozens of volunteer contributors as well as Bespoke Labs, we were able to curate TBOT, a set of 70 new tasks for terminal agents. TBOT strongly correlates with Terminal-Bench 2.0, but it's considerably easier, making it possible for even small models to show meaningful signal.
+
+Agentic evals are notoriously tough to interpret because of their long rollouts and highly technical content; to make our jobs easier, we produced a [trace viewer](https://dcagents-trace-viewer.replit.app/). You can use this with any of our eval or trace generation repositories to help parse the traces.
+
+We also maintain a [live leaderboard](https://ot-agent-leaderboard.replit.app/) tracking the 300+ models we have trained so far; if you are interested in training your own models and seeing them on our leaderboard, all you need to do is join our Discord and share the public link to your model on HF.
+
+## Build with Us!
+
+This is not the end of the road; it's just our first signpost. As a project based on radical collaboration and openness, we need your support as we race towards the finish line.
+
+Notebooks
+
+OpenThoughts is a collaboration led by universities and institutes, including Stanford, UC Berkeley, UT Austin, NYU, UW, UCLA, UNC, TUM, and LAION, and a host of supporters in the startup community, including Daytona.io, Laude Institute, Bespoke Labs and Oumi.ai.
+
+Join discord / github issues, join our effort - call to action
+
+## Citation
+
+<Citation>{`@misc{openthoughts-agent,
+  author = {Team, OpenThoughts-Agent},
+  month = Dec,
+  title = {{OpenThoughts-Agent}},
+  howpublished = {https://open-thoughts.ai/agent},
+  year = {2025}
 }`}</Citation>
