@@ -77,7 +77,7 @@ export default function Blog({ params }) {
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'Open Thoughts',
+              name: 'OpenThoughts',
             },
           }),
         }}

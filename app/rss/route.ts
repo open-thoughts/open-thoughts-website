@@ -27,9 +27,9 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-        <title>Open Thoughts</title>
+        <title>OpenThoughts</title>
         <link>${baseUrl}</link>
-        <description>Open Thoughts is building the best open reasoning datasets.</description>
+        <description>OpenThoughts is building the best open reasoning datasets.</description>
         ${itemsXml}
     </channel>
   </rss>`

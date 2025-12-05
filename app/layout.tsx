@@ -10,15 +10,15 @@ import { baseUrl } from './sitemap'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Open Thoughts',
-    template: '%s | Open Thoughts',
+    default: 'OpenThoughts',
+    template: '%s | OpenThoughts',
   },
-  description: 'Open Thoughts is building the best open source reasoning datasets.',
+  description: 'OpenThoughts is building the best open source reasoning datasets.',
   openGraph: {
-    title: 'Open Thoughts',
-    description: 'Open Thoughts is building the best open source reasoning datasets.',
+    title: 'OpenThoughts',
+    description: 'OpenThoughts is building the best open source reasoning datasets.',
     url: baseUrl,
-    siteName: 'Open Thoughts',
+    siteName: 'OpenThoughts',
     locale: 'en_US',
     type: 'website',
   },
