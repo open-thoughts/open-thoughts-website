@@ -74,19 +74,18 @@ Similar to [OpenThoughts](https://www.openthoughts.ai), the OpenThoughts-Agent S
 
 # Reinforcement Learning
 
-| Model | OT-TBDev | SWEBench-verified | TBench2 |
-|-------|----------|-------------------|---------|
-| SFT checkpoint | 16.10%±2.13 | 14.70%±1.45 | 4.90%±1.06 |
-| RL'd on R2EGym | 16.00%±2.28 (-0.10%) | 12.70%±1.33 (-2.00%) | 6.40%±1.24 (1.50%) |
-| RL'd on NL2Bash | 17.30%±1.94 (1.20%) | 15.70%±1.33 (1.00%) | 4.90%±1.18 (0.00%) |
+| Model           | OpenThoughts-TB-Dev          |         | SWEBench-verified |         | TerminalBench 2.0    |       |
+| --------------- | ----------------- | ------- | ----------------- | ------- | ---------- | ----- |
+| SFT checkpoint  | 16.10%       |         | 14.70%       |         | 4.90% |       |
+| RL'd on NL2Bash | 17.30%       | 1.20%   | 15.70%       | 1.00%   | 4.90% | 0.00% |
 
-RL is a key part of the next phase of the OpenThoughts-Agent project. We have built an RL training stack by integrating SkyRL with Harbor and stress-tested it with a large number of RL runs on TerminalBench-style tasks. Conducting RL on our [SFT-only model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1-SFT) using our [RL data, OpenThoughts-Agent-v1-RL](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL), we get a small improvement on our [development set](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) of around ~2% and an improvement of 1% on SWE-Bench verified.
+RL is a key part of the next phase of the OpenThoughts-Agent project. We have built an RL training stack by integrating [SkyRL](https://github.com/NovaSky-AI/SkyRL) with [Harbor](https://github.com/laude-institute/harbor) and stress-tested it with a large number of RL runs on TerminalBench-style tasks. Conducting RL on our [SFT-only model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1-SFT) using our [RL data, OpenThoughts-Agent-v1-RL](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL), we get a small improvement on our [development set](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) of around ~2% and an improvement of 1% on SWE-Bench verified.
 
 ## Data
 
 Our data is NL2Bash with synthetic verifiers. Our first step is to generate the instructions for the tasks. We first create synthetic bash tasks using GPT-5-Nano. Our environments are generic dockerfiles. We create pytests synthetically using GPT-5-Nano. We verify correctness of the tasks and verifiers using GPT-5 by removing any tasks GPT-5 gets zero reward on. This resulted in a set of 700 tasks.
 
-As seen in the above table, doing RL on NL2Bash outperforms using R2EGym, a standard SWE-based RL dataset. The code for generating our RL dataset is coming soon! We are excited to create new RL datasets that create even larger improvements on our benchmarks.
+As seen in the above table, doing RL on NL2Bash improves slightly over our base SFTed model. The code for generating our RL dataset is coming soon! We are excited to create new RL datasets that create even larger improvements on our benchmarks.
 
 # Evaluation
 
