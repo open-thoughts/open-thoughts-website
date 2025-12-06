@@ -74,10 +74,23 @@ Similar to [OpenThoughts](https://www.openthoughts.ai), the OpenThoughts-Agent S
 
 # Reinforcement Learning
 
-| Model           | OpenThoughts-TB-Dev          |         | SWEBench-verified |         | TerminalBench 2.0    |       |
-| --------------- | ----------------- | ------- | ----------------- | ------- | ---------- | ----- |
-| SFT checkpoint  | 16.10%       |         | 14.70%       |         | 4.90% |       |
-| RL'd on NL2Bash | 17.30%       | 1.20%   | 15.70%       | 1.00%   | 4.90% | 0.00% |
+<Table
+  data={{
+    headers: [
+      "Model",
+      "OpenThoughts-TB-Dev",
+      "Δ",
+      "SWEBench-verified",
+      "Δ",
+      "TerminalBench 2.0",
+      "Δ"
+    ],
+    rows: [
+      ["SFT checkpoint", "16.10%", "", "14.70%", "", "4.90%", ""],
+      ["RL'd on NL2Bash", "17.30%", "1.20%", "15.70%", "1.00%", "4.90%", "0.00%"]
+    ]
+  }}
+/>
 
 RL is a key part of the next phase of the OpenThoughts-Agent project. We have built an RL training stack by integrating [SkyRL](https://github.com/NovaSky-AI/SkyRL) with [Harbor](https://github.com/laude-institute/harbor) and stress-tested it with a large number of RL runs on TerminalBench-style tasks. Conducting RL on our [SFT-only model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1-SFT) using our [RL data, OpenThoughts-Agent-v1-RL](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL), we get a small improvement on our [development set](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) of around ~2% and an improvement of 1% on SWE-Bench verified.
 
