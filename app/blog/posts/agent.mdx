@@ -40,7 +40,7 @@ This is just the first step. In the near future, we plan to train more models on
 
 ## Supervised Finetuning
 
-We are excited to release [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT), our first official OpenThoughts-Agent dataset! [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT) is an SFT trace dataset containing approximately 15,000 traces drawn from two different data sources we curate: nl2bash (simple synthetically generated tasks where the agent has to format shell commands effectively) and InferredBugs is a set of bugs in C# and Java collected by Microsoft that we turned into tasks.
+We are excited to release [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT), our first official OpenThoughts-Agent dataset! [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT) is an SFT trace dataset containing approximately 15,000 traces drawn from two different data sources we curate: [NL2Bash](https://arxiv.org/pdf/1802.08979) (simple synthetically generated tasks where the agent has to format shell commands effectively) and [InferredBugs](https://github.com/microsoft/InferredBugs) is a set of bugs in C# and Java collected by Microsoft that we turned into tasks.
 
 See our exemplar InferredBugs data generation script [here](https://github.com/open-thoughts/OpenThoughts-Agent/blob/main/notebook/datagen_sft_tutorial.ipynb).
 
@@ -60,7 +60,7 @@ We define a task as a triplet of an instruction in the form of a markdown file, 
 
 ### SFT Data - Teacher Model
 
-The second design choice we ablated was the choice of teacher. One would expect that the better the teacher model is on TerminalBench, the better it performs; surprisingly, we find that this is not the case. Rather, varying teachers in the GPT model family did not improve performance, up to and including the best model on TerminalBench itself, GPT5. However, using GLM-4.6 as a teacher led to almost a 2x improvement in downstream score.
+The second design choice we ablated was the choice of teacher. One would expect that the better the teacher model is on TerminalBench, the better it performs; surprisingly, we find that this is not the case. Rather, varying teachers in the GPT model family did not improve performance. However, using GLM-4.6 as a teacher led to almost a 2x improvement in downstream score.
 
 <div className="flex justify-center my-8">
   <Image
@@ -82,7 +82,7 @@ RL is a key part of the next phase of the OpenThoughts-Agent project. We have bu
 
 ### RL Data
 
-[Our data](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL) is NL2Bash with synthetically generated tasks. Our first step is to generate the instructions for the tasks; these are seeded from the original [NL2Bash dataset](https://arxiv.org/abs/1802.08979), which consists of human-authored queries in natural language and human-authored bash commands (find, grep, etc) that fulfill the queries. In our dataset, both instructions and commands are permuted by a teacher (GPT-5 Mini). The same teacher also writes tests and runs its own tests in a Daytona sandbox, confirming task quality. Finally, the teacher-generated task is extracted from the cloud sandbox and added to the dataset. Since this process is necessarily sometimes erratic, we subsequently verify correctness of the tasks and verifiers by removing any tasks GPT-5-Codex gets zero reward on. This results in a set of approximately 700 tasks (from 10,000 originally generated tasks).
+[Our data](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL) is NL2Bash with synthetically generated tasks. Our first step is to generate the instructions for the tasks; these are seeded from the original [NL2Bash dataset](https://arxiv.org/abs/1802.08979), which consists of human-authored queries in natural language and human-authored bash commands (find, grep, etc) that fulfill the queries. In our dataset, both instructions and commands are permuted by a synthetic data generation model (GPT-5 Mini). The same model also writes tests and runs its own tests in a Daytona sandbox, confirming task quality. Finally, the model-generated task is extracted from the cloud sandbox and added to the dataset. Since this process is necessarily sometimes erratic, we subsequently verify correctness of the tasks and verifiers by removing any tasks GPT-5-Codex gets zero reward on. This results in a set of approximately 700 tasks (from 10,000 originally generated tasks).
 
 <Table
   data={{
