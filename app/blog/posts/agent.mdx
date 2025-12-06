@@ -35,7 +35,29 @@ We are excited to release OTA-1, our first official OpenThoughts-Agent dataset! 
 
 We define a task as a triplet of an instruction in the form of a markdown file, an environment defined by a DockerFile, and a verifier in the form of pytests. The verifier is optional in the SFT setting). All of our environments in this release are generic Ubuntu DockerFiles. To find the best way to generate instructions, we ablated 15 different approaches, selecting from both existing sources such as Nemo, SWESmith and Mind2Web, and those we created, such as StackExchange Overflow, Freelancer and Taskmaster. For each source, we generate approximately 10,000 tasks and let GPT-5-Nano solve each task once, resulting in a 10,000 trace SFT dataset. We then evaluated each model on our TBOT dev set.
 
+<div className="flex justify-center my-8">
+  <Image
+    src="/ota_source.png"
+    alt="OTA Data Source Ablation"
+    width={800}
+    height={600}
+    className="rounded-lg"
+  />
+</div>
+
+
 The second design choice we ablated was the choice of teacher. One would expect that the better the teacher model is on TerminalBench, the better it performs; surprisingly, we find that this is not the case. Rather, varying teachers in the GPT model family did not improve performance, up to and including the best model on TerminalBench itself, GPT5. However, using GLM-4.6 as a teacher led to almost a 2x improvement in downstream score.
+
+
+<div className="flex justify-center my-8">
+  <Image
+    src="/ota_teacher.png"
+    alt="OTA Teacher Model Comparison"
+    width={800}
+    height={600}
+    className="rounded-lg"
+  />
+</div>
 
 ## Supervised Finetuning
 
