@@ -5,6 +5,16 @@ summary: 'Curating the best open agent datasets.'
 category: 'OpenThoughts-Agent'
 ---
 
+<div className="flex justify-center my-8">
+  <Image
+    src="/open_thoughts_agent.png"
+    alt="OpenThoughts Agent Project"
+    width={600}
+    height={400}
+    className="rounded-lg"
+  />
+</div>
+
 Today, we are announcing OpenThoughts-Agent, an open-source effort to curate the best datasets for training agents. Our first release includes datasets, models and our research codebase; OpenThinker-Agent-8B is the best model of its size on Terminal-Bench 2.0 and SWE-Bench.
 
 We built OpenThinker-Agent-8B in two stages: supervised fine-tuning, followed by reinforcement learning. Each stage required its own data pipeline – RL tasks (instructions, environments, and verifiers) and SFT traces from strong teacher agents completing tasks.
