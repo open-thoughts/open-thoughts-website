@@ -15,9 +15,9 @@ category: 'OpenThoughts-Agent'
   />
 </div>
 
-Today, we are announcing OpenThoughts-Agent, an open-source effort to curate the best datasets for training agents. Our first release includes datasets, models and our research codebase; [OpenThinker-Agent-v1-8B](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) is the best model of its size on Terminal-Bench 2.0 and SWE-Bench.
+Today, we are announcing OpenThoughts-Agent, an open-source effort to curate the best datasets for training agents. Our first release includes datasets, models and our research codebase; [OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) is the best model of its size on Terminal-Bench 2.0 and SWE-Bench.
 
-We built [OpenThinker-Agent-8B](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) in two stages: supervised fine-tuning, followed by reinforcement learning. Each stage required its own data pipeline – RL tasks (instructions, environments, and verifiers) and SFT traces from strong teacher agents completing tasks.
+We built [OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) in two stages: supervised fine-tuning, followed by reinforcement learning. Each stage required its own data pipeline – RL tasks (instructions, environments, and verifiers) and SFT traces from strong teacher agents completing tasks.
 
 Our first set of release artifacts are:
 
@@ -38,7 +38,7 @@ The next phase of our project involves iterating heavily on RL data recipes. We 
 
 This is just the first step. In the near future, we plan to train more models on more data, start working with larger models and MoEs, and experiment with more sophisticated data pipelines.
 
-# Data
+# SFT Data
 
 We are excited to release [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT), our first official OpenThoughts-Agent dataset! [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT) is an SFT trace dataset containing approximately 15,000 traces drawn from three different data sources we curate: nl2bash (simple synthetically generated tasks where the agent has to format shell commands effectively) and InferredBugs is a set of bugs in C# and Java collected by Microsoft that we turned into tasks.
 
@@ -74,29 +74,26 @@ Similar to [OpenThoughts](https://www.openthoughts.ai), the OpenThoughts-Agent S
 
 # Reinforcement Learning
 
+RL is a key part of the next phase of the OpenThoughts-Agent project. We have built an RL training stack by integrating [SkyRL](https://github.com/NovaSky-AI/SkyRL) with [Harbor](https://github.com/laude-institute/harbor) and stress-tested it with a large number of RL runs on TerminalBench-style tasks. Conducting RL on our [SFT-only model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1-SFT) using our [RL data, OpenThoughts-Agent-v1-RL](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL), we get a small improvement on our [development set](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) of around ~2% and an improvement of 1% on SWE-Bench verified.
+
+## Data
+
+[Our data](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL) is NL2Bash with synthetically generated verifiers. Our first step is to generate the instructions for the tasks. We first create synthetic bash tasks using GPT-5-Nano. Our environments are generic dockerfiles. We create pytests synthetically using GPT-5-Nano. We verify correctness of the tasks and verifiers using GPT-5 by removing any tasks GPT-5 gets zero reward on. This resulted in a set of 700 tasks.
+
 <Table
   data={{
     headers: [
       "Model",
       "OpenThoughts-TB-Dev",
-      "Δ",
       "SWEBench-verified",
-      "Δ",
-      "TerminalBench 2.0",
-      "Δ"
+      "TerminalBench 2.0"
     ],
     rows: [
-      ["SFT checkpoint", "16.10%", "", "14.70%", "", "4.90%", ""],
-      ["RL'd on NL2Bash", "17.30%", "1.20%", "15.70%", "1.00%", "4.90%", "0.00%"]
+      ["SFT checkpoint", "16.10%", "14.70%", "4.90%"],
+      ["RL'd on NL2Bash", "17.30%", "15.70%", "4.90%"]
     ]
   }}
 />
-
-RL is a key part of the next phase of the OpenThoughts-Agent project. We have built an RL training stack by integrating [SkyRL](https://github.com/NovaSky-AI/SkyRL) with [Harbor](https://github.com/laude-institute/harbor) and stress-tested it with a large number of RL runs on TerminalBench-style tasks. Conducting RL on our [SFT-only model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1-SFT) using our [RL data, OpenThoughts-Agent-v1-RL](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL), we get a small improvement on our [development set](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) of around ~2% and an improvement of 1% on SWE-Bench verified.
-
-## Data
-
-Our data is NL2Bash with synthetic verifiers. Our first step is to generate the instructions for the tasks. We first create synthetic bash tasks using GPT-5-Nano. Our environments are generic dockerfiles. We create pytests synthetically using GPT-5-Nano. We verify correctness of the tasks and verifiers using GPT-5 by removing any tasks GPT-5 gets zero reward on. This resulted in a set of 700 tasks.
 
 As seen in the above table, doing RL on NL2Bash improves slightly over our base SFTed model. The code for generating our RL dataset is coming soon! We are excited to create new RL datasets that create even larger improvements on our benchmarks.
 
@@ -112,11 +109,9 @@ We also maintain a [live leaderboard](https://ot-agent-leaderboard.replit.app/) 
 
 This is not the end of the road; it's just our first signpost. As a project based on radical collaboration and openness, we need your support as we race towards the finish line.
 
-Notebooks
-
 Open Thoughts is a collaboration led by universities and institutes, including Stanford, UC Berkeley, UT Austin, NYU, UW, UCLA, UNC, TUM, and LAION, clusters like JSC, TACC, ALCC Perlmutter, ZIH, Oumi Exun by Lambda, and a host of supporters in the startup community, including Daytona.io, Laude Institute, Bespoke Labs and Oumi.ai.
 
-Join our Discord to get involved!
+Join our [Discord](https://discord.com/invite/6xWPKhGDbA) to get involved!
 
 ## Citation
 
