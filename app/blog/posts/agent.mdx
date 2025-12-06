@@ -15,38 +15,38 @@ category: 'OpenThoughts-Agent'
   />
 </div>
 
-Today, we are announcing OpenThoughts-Agent, an open-source effort to curate the best datasets for training agents. Our first release includes datasets, models and our research codebase; [OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) is the best model of its size on Terminal-Bench 2.0 and SWE-Bench.
+Today, we are announcing OpenThoughts-Agent, an open-source effort to curate the best datasets for training agents. Our first release includes datasets, models and our research codebase; [OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) is the best model of its size on Terminal-Bench 2.0.
 
 We built [OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) in two stages: supervised fine-tuning, followed by reinforcement learning. Each stage required its own data pipeline – RL tasks (instructions, environments, and verifiers) and SFT traces from strong teacher agents completing tasks.
 
 Our first set of release artifacts are:
 
-- [OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1)
+- [OpenThinker-Agent-v1 Model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1)
 - [SFT-only Model](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1-SFT)
-- [OpenThoughts-Agent-v1-SFT: SFT Data (Traces)](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT)
-- [OpenThoughts-Agent-v1-RL: RL Data (environments)](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL)
-- [Open-Thoughts-TB-Dev](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev)
+- [SFT Data (Traces)](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT)
+- [RL Data (Environments)](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL)
+- [Evaluation DevSet](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev)
 - [Codebase](https://github.com/open-thoughts/OpenThoughts-Agent)
 
 OpenThoughts-Agent is an ongoing effort.
 
-The next phase of our project involves iterating heavily on RL data recipes. We have built the training infra (integrating [Harbor](https://github.com/laude-institute/harbor) with SkyRL) for RL on the terminal bench format data. Join our [public Discord](https://discord.com/invite/6xWPKhGDbA) to get involved.
+The next phase of our project involves iterating heavily on RL data recipes. We have built the training infra (integrating [Harbor](https://github.com/laude-institute/harbor) with [SkyRL](https://github.com/NovaSky-AI/SkyRL)) for RL on the terminal bench format data. Join our [public Discord](https://discord.com/invite/6xWPKhGDbA) to get involved.
 
 # Results
 
-[OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) is the best model of its size on Terminal-Bench 2.0. It's also the best on our brand new [Open-Thoughts-TB-Dev](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) benchmark, curated especially for this project (see our evals section for more). All of these benchmarks are historically very hard for small models, with even Qwen3-8B, generally a very strong model on benchmarks, achieving low accuracy.
+[OpenThinker-Agent-v1](https://huggingface.co/open-thoughts/OpenThinker-Agent-v1) is the best model of its size on Terminal-Bench 2.0. It's also the best on our brand new [Open-Thoughts-TB-Dev](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) benchmark, curated especially for this project (see our evals section for more). These benchmarks are historically very hard for small models, with even Qwen3-8B, generally a very strong model on benchmarks, achieving low accuracy.
 
 This is just the first step. In the near future, we plan to train more models on more data, start working with larger models and MoEs, and experiment with more sophisticated data pipelines.
 
 ## Supervised Finetuning
 
-We are excited to release [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT), our first official OpenThoughts-Agent dataset! [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT) is an SFT trace dataset containing approximately 15,000 traces drawn from three different data sources we curate: nl2bash (simple synthetically generated tasks where the agent has to format shell commands effectively) and InferredBugs is a set of bugs in C# and Java collected by Microsoft that we turned into tasks.
+We are excited to release [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT), our first official OpenThoughts-Agent dataset! [OpenThoughts-Agent-v1-SFT](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT) is an SFT trace dataset containing approximately 15,000 traces drawn from two different data sources we curate: nl2bash (simple synthetically generated tasks where the agent has to format shell commands effectively) and InferredBugs is a set of bugs in C# and Java collected by Microsoft that we turned into tasks.
 
 See our exemplar InferredBugs data generation script [here](https://github.com/open-thoughts/OpenThoughts-Agent/blob/main/notebook/datagen_sft_tutorial.ipynb).
 
 ### SFT Data - Instruction Sourcing
 
-We define a task as a triplet of an instruction in the form of a markdown file, an environment defined by a DockerFile, and a verifier in the form of pytests (following [Harbor](https://github.com/laude-institute/harbor)). The verifier is not necessary for SFT data generation. All of our environments in this release are generic Ubuntu DockerFiles. To find the best way to generate instructions, we ablated 15 different approaches, selecting from both existing sources such as Nemo, SWESmith and Mind2Web, and those we created, such as StackExchange Overflow, Freelancer and Taskmaster. For each source, we generate approximately 10,000 tasks and let GPT-5-Nano solve each task once, resulting in a ~15,000 trace [SFT dataset](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT). We then evaluated each model on our new development set: [OpenThoughts-TB-Dev](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev).
+We define a task as a triplet of an instruction in the form of a markdown file, an environment defined by a DockerFile, and a verifier in the form of pytests (following [Harbor](https://github.com/laude-institute/harbor)). The verifier is not necessary for SFT data generation. All of our environments in this release are generic Ubuntu DockerFiles. To find the best way to generate instructions, we ablated 15 different approaches, selecting from both existing sources such as Nemo, SWESmith and Mind2Web, and those we created, such as StackExchange Overflow, Freelancer and Taskmaster. For each source, we generate approximately 10,000 tasks and let GPT-5-Nano solve each task once, resulting in a ~10,000 trace [SFT dataset](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-SFT). We then evaluated each model on our new development set: [OpenThoughts-TB-Dev](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev).
 
 <div className="flex justify-center my-8">
   <Image
@@ -74,7 +74,7 @@ The second design choice we ablated was the choice of teacher. One would expect 
 
 ### SFT Training
 
-Similar to [OpenThoughts](https://www.openthoughts.ai), the OpenThoughts-Agent SFT pipeline utilizes a fork of the popular [Llama-Factory](https://github.com/mlfoundations/llama-factory) framework. Because we knew we would be training a lot of models, we paid a great deal of attention to optimizing our SFT pipeline to make it as efficient and precise as possible – to paraphrase Yejin Choi and Deadpool, we aimed for "maximum effort" SFT!
+Similar to [OpenThoughts](https://www.openthoughts.ai), the OpenThoughts-Agent SFT pipeline utilizes a fork of the popular [Llama-Factory](https://github.com/mlfoundations/llama-factory) framework. Because we knew we would be training a lot of models, we paid a great deal of attention to optimizing our SFT pipeline to make it as efficient and precise as possible – to paraphrase Yejin Choi and Deadpool, we aimed for "maximum effort" SFT! We will say more about this optimization in a future release.
 
 ## Reinforcement Learning
 
@@ -82,7 +82,7 @@ RL is a key part of the next phase of the OpenThoughts-Agent project. We have bu
 
 ### RL Data
 
-[Our data](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL) is NL2Bash with synthetically generated verifiers. Our first step is to generate the instructions for the tasks. We first create synthetic bash tasks using GPT-5-Nano. Our environments are generic dockerfiles. We create pytests synthetically using GPT-5-Nano. We verify correctness of the tasks and verifiers using GPT-5 by removing any tasks GPT-5 gets zero reward on. This resulted in a set of 700 tasks.
+[Our data](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-v1-RL) is NL2Bash with synthetically generated tasks. Our first step is to generate the instructions for the tasks; these are seeded from the original [NL2Bash dataset](https://arxiv.org/abs/1802.08979), which consists of human-authored queries in natural language and human-authored bash commands (find, grep, etc) that fulfill the query, with both instructions and commands permuted by a teacher (GPT-5 Mini). The same teacher also writes tests and runs its own tests in a Daytona sandbox, confirming task quality. Finally, the teacher-generated task is extracted from the cloud sandbox and added to the dataset. Since this process is necessarily sometimes erratic, we subsequently verify correctness of the tasks and verifiers using GPT-5 by removing any tasks GPT-5-Codex gets zero reward on. This results in a set of approximately 700 tasks (from 10,000 originally generated tasks).
 
 <Table
   data={{
