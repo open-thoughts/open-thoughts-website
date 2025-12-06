@@ -70,10 +70,24 @@ export default async function Page() {
           <a href="#about-us" className="anchor" />
           About us
         </h2>
-        <p>We are a team of researchers and engineers from Stanford, University of California Berkeley, University of Washington, Bespoke Labs, UT Austin, Juelich Supercomputing Center (JSC), LAION, UCLA, UNC Chapel Hill, TUM, and Toyota Research Institute united around building the best datasets (and thus the best models). See our previous works at <a href="https://www.datacomp.ai/">datacomp.ai</a> and <a href="https://github.com/mlfoundations">mlfoundations</a>.</p>
-        <p>OpenThoughts is supported by <a href="https://www.bespokelabs.ai/">Bespoke Labs</a>, <a href="https://www.ifml.institute/">NSF IFML</a>, <a href="https://ml.utexas.edu/">UT Austin Machine Learning Lab</a>, <a href="https://www.fz-juelich.de/en/ias/jsc">Juelich Supercomputing Center</a>, <a href="https://www.tri.global/">Toyota Research Institute</a>, <a href="https://lambdalabs.com/">Lambda Labs</a>, NHR Center of TU Dresden, MCML partition of the Leibniz Supercomputing Center, and the Leonardo Supercomputer of CINECA.</p>
+        <p>
+          We are a collaboration led by researchers and engineers from Stanford,
+          UC Berkeley, UT Austin, NYU, University of Washington, UCSD, ASU, CMU, UCLA, UNC Chapel
+          Hill, TUM, LAION, and other partners focused on building the best datasets
+          (and therefore the best models). See our previous work at
+          <a href="https://www.datacomp.ai/">datacomp.ai</a> and
+          <a href="https://github.com/mlfoundations">mlfoundations</a>.
+        </p>
+        <p>
+          OpenThoughts is powered by a broad ecosystem: academic and national
+          lab clusters such as Juelich Supercomputing Center (JSC), TACC, ALCC
+          Perlmutter, ZIH, and Oumi Exun by Lambda Labs; and supporters across the
+          startup community including Daytona.io, Laude Institute, Bespoke Labs,
+          and Oumi.ai, alongside long-standing partners such as the NSF IFML,
+          UT Austin Machine Learning Lab, Toyota Research Institute, Lambda Labs,
+          and the NHR Center of TU Dresden.
+        </p>
       </article>
-
       <div className="mt-16 border-t border-neutral-200 dark:border-neutral-800 pt-8">
         <MailchimpForm />
       </div>
