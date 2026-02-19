@@ -7,7 +7,18 @@ import { Citation } from './Citation'
 import { BarChart } from './charts/BarChart'
 import { BlogPosts } from './posts'
 
-function Table({ data }) {
+function Table({ data, children }: { data?: { headers: string[], rows: string[][] }, children?: React.ReactNode }) {
+  // If no data prop, render children as a standard table
+  if (!data) {
+    return (
+      <div className="my-6 overflow-x-auto">
+        <table className="w-full border-collapse text-sm">
+          {children}
+        </table>
+      </div>
+    )
+  }
+
   let headers = data.headers.map((header, index) => (
     <th key={index} className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">
       {header}

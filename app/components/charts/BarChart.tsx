@@ -31,6 +31,10 @@ interface BarChartProps {
 }
 
 export function BarChart({ data, xLabel, yLabel, height = 400 }: BarChartProps) {
+  if (!data || !data.labels || !data.values) {
+    return <div style={{ height: height }}>Loading chart...</div>
+  }
+
   const chartData = {
     labels: data.labels,
     datasets: [
