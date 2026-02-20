@@ -34,15 +34,39 @@ A well-calibrated dev set gives you meaningful signal even when you're iterating
 
 We balanced task difficulty using Claude Haiku 4.5 as a reference model:
 
-<Table data={{
-  headers: ['Difficulty', 'Pass Rate Range', 'Task Count'],
-  rows: [
-    ['Easy', '>= 70%', '40'],
-    ['Medium', '40-69%', '26'],
-    ['Hard', '10-39%', '26'],
-    ['Extreme', '< 10%', '8'],
-  ]
-}} />
+<div className="my-6 overflow-x-auto">
+  <table className="w-full border-collapse text-sm">
+    <thead>
+      <tr>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Difficulty</th>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Pass Rate Range</th>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Task Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">Easy</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">&gt;= 70%</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">40</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">Medium</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">40-69%</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">26</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">Hard</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">10-39%</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">26</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">Extreme</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">&lt; 10%</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">8</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 This split gives us two things at once:
 
@@ -81,18 +105,54 @@ TB2 is still the benchmark we use for final quality checks. Dev Set v2 is the be
 
 Below is a current snapshot of model performance on Dev Set v2 and TB2. See full results [here](https://ot-agent-leaderboard.replit.app/).
 
-<Table data={{
-  headers: ['Model', 'Dev Set v2', 'TB2'],
-  rows: [
-    ['moonshotai/Kimi-K2.5', '75.1% ± 2.10', '31.1% ± 1.87'],
-    ['zai-org/GLM-4.7', '67.7% ± 2.08', '35.2% ± 1.67'],
-    ['anthropic/claude-haiku-4-5', '64.4% ± 3.78', '28.3% ± 2.9'],
-    ['openai/gpt-5-mini', '50.5% ± 2.23', '24.9% ± 2.5'],
-    ['Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8', '42.1% ± 2.27', '26.6% ± 0.00'],
-    ['Qwen/Qwen3-235B-A22B-Instruct-2507-tput', '37.0% ± 2.32', '14.6% ± 1.45'],
-    ['nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16', '21.5% ± 1.78', '9.5% ± 1.18'],
-  ]
-}} />
+<div className="my-6 overflow-x-auto">
+  <table className="w-full border-collapse text-sm">
+    <thead>
+      <tr>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Model</th>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Dev Set v2</th>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">TB2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">moonshotai/Kimi-K2.5</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">75.1% ± 2.10</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">31.1% ± 1.87</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">zai-org/GLM-4.7</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">67.7% ± 2.08</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">35.2% ± 1.67</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">anthropic/claude-haiku-4-5</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">64.4% ± 3.78</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">28.3% ± 2.9</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">openai/gpt-5-mini</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">50.5% ± 2.23</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">24.9% ± 2.5</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">42.1% ± 2.27</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">26.6% ± 0.00</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">Qwen/Qwen3-235B-A22B-Instruct-2507-tput</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">37.0% ± 2.32</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">14.6% ± 1.45</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">21.5% ± 1.78</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">9.5% ± 1.18</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 The pattern is what we wanted to see: Dev Set v2 preserves ranking signal and gives more room to measure meaningful deltas during development.
 
@@ -116,15 +176,39 @@ Dev Set v2 is not only more sensitive for iteration, it is also much faster to r
 
 All results are measured using harbor framework on 32 concurrent Daytona cloud sandboxes with default timeout limit.
 
-<Table data={{
-  headers: ['Model', 'Dev Set v2 Runtime', 'TB2 Runtime'],
-  rows: [
-    ['moonshotai/Kimi-K2.5', '84 minutes', '220 minutes'],
-    ['zai-org/GLM-4.7', '65 minutes', '300 minutes'],
-    ['openai/gpt-5-mini', '51 minutes', '397 minutes'],
-    ['anthropic/claude-haiku-4-5', '76 minutes', '605 minutes'],
-  ]
-}} />
+<div className="my-6 overflow-x-auto">
+  <table className="w-full border-collapse text-sm">
+    <thead>
+      <tr>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Model</th>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">Dev Set v2 Runtime</th>
+        <th className="px-4 py-2 border-b-2 border-neutral-200 dark:border-neutral-800 font-semibold text-left">TB2 Runtime</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">moonshotai/Kimi-K2.5</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">84 minutes</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">220 minutes</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">zai-org/GLM-4.7</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">65 minutes</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">300 minutes</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">openai/gpt-5-mini</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">51 minutes</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">397 minutes</td>
+      </tr>
+      <tr className="hover:bg-neutral-50 dark:hover:bg-neutral-900">
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">anthropic/claude-haiku-4-5</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">76 minutes</td>
+        <td className="px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">605 minutes</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Closing
 
