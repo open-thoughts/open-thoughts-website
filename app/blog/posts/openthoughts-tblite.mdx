@@ -32,7 +32,9 @@ When a model sits near the floor on TB2 (e.g., Qwen 3 8B scores under 1%), many 
 - tool-use and prompting changes
 - model-to-model comparisons in the same size class
 
-A well-calibrated dev set gives you meaningful signal even when you're iterating on models that can't yet crack TB2's hardest tasks. OpenThoughts-TBLite improves on our [earlier dev set](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev) with better difficulty calibration and broader task coverage without becoming a toy benchmark.
+A well-calibrated dev set gives you meaningful signal even when you're iterating on models that can't yet crack TB2's hardest tasks. OpenThoughts-TBLite improves on our earlier dev set[^1] with better difficulty calibration and broader task coverage without becoming a toy benchmark.
+
+[^1]: [OpenThoughts-TB-dev](https://huggingface.co/datasets/open-thoughts/OpenThoughts-TB-dev)
 
 ## What OpenThoughts-TBLite Is
 
@@ -233,7 +235,7 @@ OpenThoughts-TBLite is available on Hugging Face: [OpenThoughts-TBLite](https://
 @software{OpenThoughts-TBLite,
   author = {OpenThoughts-Agent team, Snorkel AI, Bespoke Labs}
   month = Feb,
-  title = {{Terminal-Bench OpenThoughts-TBLite: A High-Signal Benchmark for Iterating on Terminal Agents}},
+  title = {{OpenThoughts-TBLite: A High-Signal Benchmark for Iterating on Terminal Agents}},
   year = {2026}
 }
 ```
