@@ -15,11 +15,14 @@ category: 'OpenThoughts-Agent'
   />
 </div>
 
-**OpenThoughts-Agent-32B is the SOTA open-data agentic model at its scale.** Agentic language models dramatically expand the applications of AI, yet little is publicly known about how to curate training data for broadly capable agents. Existing open efforts such as SWE-Smith, SERA, and Nemotron-Terminal typically target a single benchmark, leaving open the question of how to train models that generalize across diverse agentic tasks. The OpenThoughts-Agent (OT-Agent) project addresses this gap with a fully open data curation pipeline for training agentic models. We assemble a training set of 100K examples from our pipeline and fine-tune Qwen3-32B on this dataset, yielding an average accuracy of 44.8% across seven agentic benchmarks and a 3.9-percentage-point improvement over the strongest existing open-data agentic model (Nemotron-Terminal-32B, 40.9%). Moreover, our training data exhibits strong scaling properties, outperforming alternative open datasets across all training set sizes in compute-controlled comparisons.
+**[OpenThoughts-Agent-32B](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B) is the SOTA open-data agentic model at its scale.** Agentic language models dramatically expand the applications of AI, yet little is publicly known about how to curate training data for broadly capable agents. Existing open efforts such as [SWE-Smith](https://swesmith.com), [SERA](INSERT_LINK), and [Nemotron-Terminal](INSERT_LINK) typically target a single benchmark, leaving open the question of how to train models that generalize across diverse agentic tasks. The OpenThoughts-Agent (OT-Agent) project addresses this gap with a fully open data curation pipeline for training agentic models. We assemble a training set of 100K examples from our pipeline and fine-tune [Qwen3-32B](https://huggingface.co/Qwen/Qwen3-32B) on this dataset, yielding an average accuracy of 44.8% across seven agentic benchmarks and a 3.9-percentage-point improvement over the strongest existing open-data agentic model ([Nemotron-Terminal-32B](INSERT_LINK), 40.9%). Moreover, our training data exhibits strong scaling properties, outperforming alternative open datasets across all training set sizes in compute-controlled comparisons.
 
 Our detailed report and experimental artifacts are fully public for the community to build upon together:
 
-{/* TODO: INSERT LINKS HERE */}
+- [Paper](INSERT_LINK)
+- [OpenThinkerAgent-32B Model](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B)
+- [OpenThoughts-Agent-SFT-100K Dataset](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-SFT-100K)
+- [Codebase](https://github.com/open-thoughts/OpenThoughts-Agent)
 
 ## OpenThoughts-Agent Data Pipeline
 
@@ -63,7 +66,7 @@ Our final pipeline is depicted below:
 
 ## Scaling up
 
-Dataset size is a powerful metric for improving downstream quality. Using the above insights and increasing the dataset scale to 100K, we generate the SOTA open-data 32B agentic model. Across dataset scales, we see our dataset is the only one competitive on both general agentic and coding capabilities.
+Dataset size is a powerful metric for improving downstream quality. Using the above insights and increasing the dataset scale to 100K, we generate the [SOTA open-data 32B agentic model](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B). Across dataset scales, we see our dataset is the only one competitive on both general agentic and coding capabilities.
 
 <div className="flex justify-center my-8">
   <Image
@@ -87,11 +90,11 @@ Dataset size is a powerful metric for improving downstream quality. Using the ab
   />
 </div>
 
-Our final model OpenThinkerAgent-32B is a very strong agentic model. Not only is it good at the capabilities on core benchmarks tracked throughout our ablation, but it is also SOTA on 4 out of the 5 held-out benchmarks, including capabilities in finance, search, and multilingual code. It outperforms all existing open-data agentic models at the same model scale on average.
+Our final model [OpenThinkerAgent-32B](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B) is a very strong agentic model. Not only is it good at the capabilities on core benchmarks tracked throughout our ablation, but it is also SOTA on 4 out of the 5 held-out benchmarks, including capabilities in finance, search, and multilingual code. It outperforms all existing open-data agentic models at the same model scale on average.
 
 ## Reinforcement Learning
 
-We also briefly explore sourcing tasks for RL datasets. After iterating through several RL environment generation strategies, we found pymethods2test to be the most performant. It is a mix of Codeforces / CodeChef / TopCoder style competitive-programming problems that have been re-cast as single-function Python contracts with synthesized docstring-style task descriptions and auto-generated unittest suites. Training an 8B model with a short SFT phase and RLing on this dataset yields the SOTA open-data 8B agentic model.
+We also briefly explore sourcing tasks for RL datasets. After iterating through several RL environment generation strategies, we found [pymethods2test](INSERT_LINK) to be the most performant. It is a mix of Codeforces / CodeChef / TopCoder style competitive-programming problems that have been re-cast as single-function Python contracts with synthesized docstring-style task descriptions and auto-generated unittest suites. Training an [8B model](https://huggingface.co/Qwen/Qwen3-8B) with a short SFT phase and RLing on this dataset yields the [SOTA open-data 8B agentic model](INSERT_LINK).
 
 <div className="flex justify-center my-8">
   <Image
@@ -105,7 +108,7 @@ We also briefly explore sourcing tasks for RL datasets. After iterating through 
 
 ## Conclusion
 
-Our model OpenThinkerAgent-32B and OpenThoughts-Agent-SFT-100K are the SOTA model and dataset for agentic training. We built these artifacts through over 100 careful agentic SFT data curation ablations. We release all these artifacts in hopes that we fuel the research community to further improve agentic capabilities of open-source models.
+Our model [OpenThinkerAgent-32B](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B) and [OpenThoughts-Agent-SFT-100K](https://huggingface.co/datasets/open-thoughts/OpenThoughts-Agent-SFT-100K) are the SOTA model and dataset for agentic training. We built these artifacts through over 100 careful agentic SFT data curation ablations. We release all these artifacts in hopes that we fuel the research community to further improve agentic capabilities of open-source models.
 
 ## Citation
 
