@@ -1,7 +1,7 @@
 ---
 title: 'OpenThoughts-Agent'
 publishedAt: '2026-06-10'
-summary: 'OpenThoughts-Agent is a family of best-in-class open-data agentic models at their scales.'
+summary: 'OpenThoughts-Agent is a family of best-in-class open-data Qwen-3 family models.'
 category: 'OpenThoughts-Agent'
 ---
 
@@ -15,7 +15,7 @@ category: 'OpenThoughts-Agent'
   />
 </div>
 
-**[OpenThoughts-](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B)[Agent](https://huggingface.co/open-thoughts/OpenThinkerAgent-8B-RL) is a family of best-in-class open-data agentic models at their scales.** Agentic language models dramatically expand the applications of AI, yet little is publicly known about how to curate training data for broadly capable agents. Existing open efforts such as [SWE-Smith](https://swesmith.com), [SERA](https://arxiv.org/abs/2601.20789), and [Nemotron-Terminal](https://arxiv.org/abs/2602.21193) typically target a single benchmark, leaving open the question of how to train models that generalize across diverse agentic tasks. The OpenThoughts-Agent (OT-Agent) project addresses this gap with a fully open data curation pipeline for training agentic models. We assemble a training set of 100K examples from our pipeline and fine-tune [Qwen3-32B](https://huggingface.co/Qwen/Qwen3-32B) on this dataset, yielding an average accuracy of 44.8% across seven agentic benchmarks and a 3.9-percentage-point improvement over the strongest existing open-data agentic model ([Nemotron-Terminal-32B](https://arxiv.org/abs/2602.21193), 40.9%). Moreover, our training data exhibits strong scaling properties, outperforming alternative open datasets across all training set sizes in compute-controlled comparisons.
+**[OpenThoughts-](https://huggingface.co/open-thoughts/OpenThinkerAgent-32B)[Agent](https://huggingface.co/open-thoughts/OpenThinkerAgent-8B-RL) is a family of best-in-class open-data Qwen-3 family models.** Agentic language models dramatically expand the applications of AI, yet little is publicly known about how to curate training data for broadly capable agents. Existing open efforts such as [SWE-Smith](https://swesmith.com), [SERA](https://arxiv.org/abs/2601.20789), and [Nemotron-Terminal](https://arxiv.org/abs/2602.21193) typically target a single benchmark, leaving open the question of how to train models that generalize across diverse agentic tasks. The OpenThoughts-Agent (OT-Agent) project addresses this gap with a fully open data curation pipeline for training agentic models. We assemble a training set of 100K examples from our pipeline and fine-tune [Qwen3-32B](https://huggingface.co/Qwen/Qwen3-32B) on this dataset, yielding an average accuracy of 44.8% across seven agentic benchmarks and a 3.9-percentage-point improvement over the strongest existing open-data agentic model ([Nemotron-Terminal-32B](https://arxiv.org/abs/2602.21193), 40.9%). Moreover, our training data exhibits strong scaling properties, outperforming alternative open datasets across all training set sizes in compute-controlled comparisons.
 
 Our detailed report and experimental artifacts are fully public for the community to build upon together:
 
@@ -70,9 +70,9 @@ Dataset size is a powerful metric for improving downstream quality. Using the ab
 <div className="flex justify-center my-8">
   <Image
     src="/ota_scaling.png"
-    alt="Scaling curves on SWE-bench Verified and Terminal-Bench 2.0 across dataset sizes, comparing OT-Agent with Nemotron-Terminal-Corpus and SERA"
+    alt="Scaling curves on SWE-Bench Verified (100), Terminal-Bench 2.0, and All Average across dataset sizes, comparing OT-Agent (Qwen3-32B and 8B) with Nemotron-Terminal-Corpus, SERA, and base Qwen3"
     width={800}
-    height={323}
+    height={268}
     className="rounded-lg"
   />
 </div>
